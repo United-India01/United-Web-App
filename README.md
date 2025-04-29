@@ -17,7 +17,7 @@ gemini-united-project/
 - [Home Page](/src/home.html)
 - [Login Page](/src/login.html)
 - [Profile Page](/src/profile.html)
-- [Organization Profile](/src/org profile page.html)
+- [Organization Profile](/src/org_prof_page.html)
 - [Notifications](/src/notifications.html)
 - [Direct Messages](/src/dms.html)
 - [Upload](/src/upload.html)

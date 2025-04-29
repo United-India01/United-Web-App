@@ -1,0 +1,223 @@
+ /* Apply Inter font globally */
+ body {
+    font-family: 'Inter', sans-serif;
+    /* Define dark theme colors consistent with others */
+    --background-dark: #1a1a2e;
+    --card-bg: #2a2a4e;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0e0;
+    --text-link: #6a6aff;
+    --border-color: #4a4a8e;
+    --icon-color: #a0a0e0;
+    --follow-button-bg: #6a6aff; /* Blue follow button */
+    --follow-button-text: #ffffff;
+    --follow-button-hover-bg: #5a5aff;
+    --rating-color: #facc15; /* yellow-400 */
+    --tab-active-border: #6a6aff;
+    --tab-inactive-text: #a0a0e0;
+}
+/* Dark theme setup */
+html, body {
+    background-color: var(--background-dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+/* Top Bar (Same as home.html) */
+.top-bar {
+    background-color: var(--card-bg);
+    padding: 0.75rem 1rem; /* py-3 px-4 */
+    display: flex;
+    align-items: center;
+    gap: 0.75rem; /* gap-3 */
+    position: sticky; top: 0; z-index: 20;
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+.top-bar .icon-button {
+    color: var(--icon-color); font-size: 1.25rem; background: none;
+    border: none; padding: 0.25rem; cursor: pointer;
+}
+.top-bar .search-input {
+    flex-grow: 1; background: none; border: none; color: var(--text-secondary);
+    font-size: 1rem; padding: 0.25rem;
+}
+.top-bar .search-input:focus { outline: none; color: var(--text-primary); }
+
+/* Main Content Area */
+.main-content {
+    padding: 1rem; /* p-4 */
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+/* Organization Header */
+.org-header {
+    display: flex;
+    flex-direction: column; /* Stack logo/stats and name/address */
+    align-items: center; /* Center items horizontally */
+    margin-bottom: 1.5rem; /* mb-6 */
+    position: relative; /* For bookmark positioning */
+}
+.org-header-top {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 1rem; /* gap-4 */
+    margin-bottom: 1rem; /* mb-4 */
+}
+.org-logo {
+    width: 72px; /* Larger logo */
+    height: 72px;
+    border-radius: 50%;
+    background-color: white; /* White background for logo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 2px solid var(--border-color);
+}
+.org-logo img {
+    max-width: 80%; /* Adjust as needed */
+    max-height: 80%;
+    object-fit: contain;
+}
+.org-stats {
+    display: flex;
+    gap: 1.5rem; /* gap-6 */
+    align-items: center;
+    flex-grow: 1; /* Take available space */
+    justify-content: center; /* Center stats */
+}
+.stat-item {
+    text-align: center;
+}
+.stat-value {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem; /* gap-1 */
+}
+.stat-value .fa-star { color: var(--rating-color); }
+.stat-label {
+    font-size: 0.75rem; /* text-xs */
+    color: var(--text-secondary);
+    margin-top: 0.125rem; /* mt-0.5 */
+}
+.bookmark-icon-org { /* Bookmark specific to org header */
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: var(--icon-color);
+    font-size: 1.25rem;
+    background: none; border: none; cursor: pointer; padding: 0.25rem;
+}
+ .bookmark-icon-org:hover { color: var(--text-primary); }
+
+.org-info {
+    text-align: center; /* Center name and address */
+    width: 100%;
+}
+.org-name {
+    font-size: 1.25rem; /* text-xl */
+    font-weight: 600;
+    margin-bottom: 0.5rem; /* mb-2 */
+}
+.org-address {
+    font-size: 0.8rem; /* text-xs */
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center address line */
+    gap: 0.375rem; /* gap-1.5 */
+    margin-bottom: 1rem; /* mb-4 */
+    text-align: center; /* Ensure text within is centered */
+    max-width: 90%; /* Prevent overly long address */
+    margin-left: auto;
+    margin-right: auto;
+}
+.org-address i {
+    flex-shrink: 0; /* Prevent icon shrinking */
+}
+
+.follow-button {
+    background-color: var(--follow-button-bg);
+    color: var(--follow-button-text);
+    padding: 0.625rem 1.5rem; /* py-2.5 px-6 */
+    border: none;
+    border-radius: 9999px; /* rounded-full */
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-bottom: 1.5rem; /* mb-6 */
+}
+.follow-button:hover {
+    background-color: var(--follow-button-hover-bg);
+}
+ .follow-button.following { /* Style for when following */
+     background-color: var(--card-bg);
+     color: var(--text-secondary);
+     border: 1px solid var(--border-color);
+ }
+
+/* Tabs Section (Reusing styles from post_detail.html) */
+.tabs-nav {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1rem; /* mb-4 */
+}
+.tab-link {
+    flex: 1; /* Make tabs take equal width */
+    text-align: center;
+    padding: 0.75rem 1rem; /* py-3 px-4 */
+    cursor: pointer;
+    color: var(--tab-inactive-text);
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.2s, border-color 0.2s;
+}
+.tab-link:hover { color: var(--text-primary); }
+.tab-link.active {
+    color: var(--text-primary);
+    border-bottom-color: var(--tab-active-border);
+}
+
+/* Tab Content Area */
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.no-content-message {
+    text-align: center; color: var(--text-secondary);
+    padding: 2rem 0; font-size: 0.9rem;
+}
+/* Post Card Styling (Minimal for placeholder) */
+.post-card-minimal {
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    border: 1px solid var(--border-color);
+}
+
+
+/* Bottom Navigation (Reusing styles) */
+.bottom-nav {
+     position: fixed; bottom: 0; left: 0; right: 0;
+     background-color: var(--card-bg); border-top: 1px solid var(--border-color);
+     display: flex; justify-content: space-around; padding: 0.5rem 0;
+     box-shadow: 0 -2px 5px rgba(0,0,0,0.1); z-index: 10; flex-shrink: 0;
+}
+.nav-item {
+     display: flex; flex-direction: column; align-items: center; text-decoration: none;
+     color: var(--icon-color); font-size: 0.75rem; padding: 0.25rem 0.5rem;
+     transition: color 0.2s ease; border: none; background: none; cursor: pointer;
+}
+.nav-item.active, .nav-item:hover { color: var(--text-primary); }
+.nav-item i { font-size: 1.25rem; margin-bottom: 0.125rem; }

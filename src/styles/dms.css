@@ -1,0 +1,178 @@
+ /* Apply Inter font globally */
+ body {
+    font-family: 'Inter', sans-serif;
+    /* Define dark theme colors consistent with others */
+    --background-dark: #1a1a2e;
+    --card-bg: #2a2a4e;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0e0;
+    --text-link: #6a6aff;
+    --border-color: #4a4a8e;
+    --icon-color: #a0a0e0;
+    --unread-bg: #6a6aff; /* Use link color for unread badge */
+    --unread-text: #ffffff;
+}
+/* Dark theme setup */
+html, body {
+    background-color: var(--background-dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+/* Top Header */
+.app-header {
+    background-color: var(--card-bg); /* Use card background for header */
+    padding: 1rem 1.5rem; /* py-4 px-6 */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky; top: 0; z-index: 20;
+    flex-shrink: 0;
+}
+.header-title {
+    font-size: 1.25rem; /* text-xl */
+    font-weight: 600; /* font-semibold */
+}
+.header-actions button {
+    color: var(--icon-color);
+    font-size: 1.25rem; /* text-xl */
+    background: none;
+    border: none;
+    padding: 0.25rem;
+    cursor: pointer;
+    margin-left: 1rem; /* ml-4 */
+    transition: color 0.2s ease;
+}
+.header-actions button:hover { color: var(--text-primary); }
+
+/* Main Content Area - Chat List */
+.main-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    /* No padding here, padding will be on list items */
+}
+
+/* Chat Item Styling */
+.chat-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem; /* py-3 px-4 */
+    gap: 0.75rem; /* gap-3 */
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s ease;
+}
+.chat-item:hover {
+    background-color: rgba(255, 255, 255, 0.03); /* Subtle hover */
+}
+.chat-avatar {
+    width: 48px; /* Slightly larger avatar */
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--card-bg); /* Placeholder background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 1px solid var(--border-color);
+}
+.chat-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.chat-avatar .group-icon { /* Specific style for group icons */
+    font-size: 1.5rem; /* text-2xl */
+    color: var(--icon-color);
+}
+
+.chat-info {
+    flex-grow: 1;
+    overflow: hidden; /* Prevent long text overflow */
+}
+.chat-info-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline; /* Align name and time */
+    margin-bottom: 0.125rem; /* mb-0.5 */
+}
+.chat-name {
+    font-weight: 500; /* font-medium */
+    font-size: 1rem; /* text-base */
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.chat-time {
+    font-size: 0.75rem; /* text-xs */
+    color: var(--text-secondary);
+    flex-shrink: 0; /* Prevent time from shrinking */
+    margin-left: 0.5rem; /* ml-2 */
+}
+.chat-info-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.last-message {
+    font-size: 0.875rem; /* text-sm */
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 0.5rem; /* Add padding before unread count */
+}
+.last-message .fa-check-double { /* Read receipt icon */
+     font-size: 0.8em;
+     margin-right: 0.25rem;
+}
+.unread-badge {
+    background-color: var(--unread-bg);
+    color: var(--unread-text);
+    font-size: 0.7rem; /* Smaller than text-xs */
+    font-weight: 600;
+    border-radius: 9999px; /* rounded-full */
+    padding: 0.125rem 0.4rem; /* py-0.5 px-1.5 */
+    min-width: 18px; /* Ensure minimum width */
+    text-align: center;
+    flex-shrink: 0; /* Prevent badge shrinking */
+}
+
+/* Floating Action Button (Optional) */
+.fab {
+    position: fixed;
+    bottom: 6rem; /* Adjust based on bottom nav height */
+    right: 1.5rem;
+    background-color: var(--text-link);
+    color: white;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    z-index: 15;
+}
+.fab:hover {
+    background-color: var(--follow-button-hover-bg);
+}
+.fab i { font-size: 1.5rem; /* text-2xl */ }
+
+
+/* Bottom Navigation (Reusing styles) */
+.bottom-nav {
+     position: fixed; bottom: 0; left: 0; right: 0;
+     background-color: var(--card-bg); border-top: 1px solid var(--border-color);
+     display: flex; justify-content: space-around; padding: 0.5rem 0;
+     box-shadow: 0 -2px 5px rgba(0,0,0,0.1); z-index: 10; flex-shrink: 0;
+}
+.nav-item {
+     display: flex; flex-direction: column; align-items: center; text-decoration: none;
+     color: var(--icon-color); font-size: 0.75rem; padding: 0.25rem 0.5rem;
+     transition: color 0.2s ease; border: none; background: none; cursor: pointer;
+}
+.nav-item.active, .nav-item:hover { color: var(--text-primary); }
+.nav-item i { font-size: 1.25rem; margin-bottom: 0.125rem; }

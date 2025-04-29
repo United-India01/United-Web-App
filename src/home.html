@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Gemini United Insurance</title>
+    <link href="styles/home.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="flex justify-between items-center max-w-4xl mx-auto">
+            <h1 class="text-xl font-semibold">Gemini United</h1>
+            <button id="newPostButton" class="btn-login px-4 py-2">New Post</button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto pt-20 px-4">
+        <!-- Sample posts -->
+        <div class="post-card" data-post-id="1">
+            <div class="post-header">
+                <img src="https://via.placeholder.com/40" alt="User avatar" class="post-avatar">
+                <div class="post-meta">
+                    <div class="post-author">John Doe</div>
+                    <div class="post-time">2 hours ago</div>
+                </div>
+            </div>
+            <div class="post-content">
+                Just completed another successful insurance claim processing! #Insurance #CustomerService
+            </div>
+            <div class="post-actions">
+                <button class="action-button like-button"><i class="far fa-heart"></i></button>
+                <button class="action-button comment-button"><i class="far fa-comment"></i></button>
+                <button class="action-button share-button"><i class="far fa-share-square"></i></button>
+            </div>
+        </div>
+
+        <div class="post-card" data-post-id="2">
+            <div class="post-header">
+                <img src="https://via.placeholder.com/40" alt="User avatar" class="post-avatar">
+                <div class="post-meta">
+                    <div class="post-author">Jane Smith</div>
+                    <div class="post-time">5 hours ago</div>
+                </div>
+            </div>
+            <div class="post-content">
+                Important update: New health insurance policies now available! Check out the details. #HealthInsurance #Update
+            </div>
+            <img src="https://via.placeholder.com/600x300" alt="Insurance policy update" class="post-image">
+            <div class="post-actions">
+                <button class="action-button like-button"><i class="far fa-heart"></i></button>
+                <button class="action-button comment-button"><i class="far fa-comment"></i></button>
+                <button class="action-button share-button"><i class="far fa-share-square"></i></button>
+            </div>
+        </div>
+    </main>
+
+    <nav class="fixed bottom-0 left-0 right-0 bg-gray-900 p-4 flex justify-center space-x-8">
+        <a href="home.html" class="text-gray-400 hover:text-white"><i class="fas fa-home"></i></a>
+        <a href="notifications.html" class="text-gray-400 hover:text-white"><i class="fas fa-bell"></i></a>
+        <a href="profile.html" class="text-gray-400 hover:text-white"><i class="fas fa-user"></i></a>
+        <a href="dms.html" class="text-gray-400 hover:text-white"><i class="fas fa-envelope"></i></a>
+    </nav>
+
+    <script src="scripts/home.js"></script>
+</body>
+</html>

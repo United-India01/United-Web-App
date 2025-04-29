@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Post - Gemini United Insurance</title>
+    <link href="styles/upload.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="flex justify-between items-center max-w-4xl mx-auto p-4">
+            <h1 class="text-xl font-semibold">Create New Post</h1>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4">
+        <form class="upload-form">
+            <div class="form-group">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" id="title" class="form-input" placeholder="Enter post title" required>
+            </div>
+
+            <div class="form-group">
+                <label for="content" class="form-label">Content</label>
+                <textarea id="content" class="form-input form-textarea" placeholder="What's on your mind?" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Tags</label>
+                <div class="tags-input-container">
+                    <input type="text" class="tags-input" placeholder="Add tags (press Enter)">
+                </div>
+                <small class="text-gray-400">Press Enter or comma to add tags</small>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Image</label>
+                <div class="file-upload">
+                    <input type="file" class="file-input" accept="image/*">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <div class="file-upload-text">Drag and drop an image or click to upload</div>
+                    <div class="text-sm text-gray-400">Max file size: 5MB</div>
+                </div>
+                <div class="image-preview">
+                    <img class="preview-image" src="" alt="Preview">
+                    <button type="button" class="remove-preview">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-4">
+                <a href="home.html" class="btn-guest">Cancel</a>
+                <button type="submit" class="btn-login">Post</button>
+            </div>
+        </form>
+    </main>
+
+    <nav class="fixed bottom-0 left-0 right-0 bg-gray-900 p-4 flex justify-center space-x-8">
+        <a href="home.html" class="text-gray-400 hover:text-white"><i class="fas fa-home"></i></a>
+        <a href="notifications.html" class="text-gray-400 hover:text-white"><i class="fas fa-bell"></i></a>
+        <a href="profile.html" class="text-gray-400 hover:text-white"><i class="fas fa-user"></i></a>
+        <a href="dms.html" class="text-gray-400 hover:text-white"><i class="fas fa-envelope"></i></a>
+    </nav>
+
+    <script src="scripts/upload.js"></script>
+</body>
+</html>

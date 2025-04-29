@@ -1,0 +1,171 @@
+ /* Apply Inter font globally */
+ body {
+    font-family: 'Inter', sans-serif;
+    /* Define dark theme colors based on login/profile images */
+    --background-dark: #1a1a2e; /* Dark blue/purple */
+    --card-bg: #2a2a4e; /* Slightly lighter background for elements */
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0e0; /* Lighter text */
+    --text-link: #6a6aff; /* Blue link color */
+    --border-color: #4a4a8e;
+    --icon-color: #a0a0e0; /* Color for menu icons */
+    --toggle-bg-off: #4a4a8e;
+    --toggle-bg-on: #6a6aff;
+    --toggle-knob: #ffffff;
+}
+/* Dark theme setup */
+html, body {
+    background-color: var(--background-dark);
+    color: var(--text-primary);
+    padding-bottom: 70px; /* Add padding for bottom nav */
+}
+/* Profile Avatar Section */
+.profile-avatar-section {
+    padding: 2rem 1rem; /* py-8 px-4 */
+    text-align: center;
+}
+.profile-avatar {
+    width: 100px; /* Adjust size as needed */
+    height: 100px;
+    border-radius: 50%;
+    background-color: var(--card-bg); /* Placeholder background */
+    margin: 0 auto 1rem; /* Center and add bottom margin */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 3px solid var(--border-color);
+    /* Placeholder for 3D avatar - replace with actual image/component */
+    background-image: url('https://placehold.co/100x100/2a2a4e/ffffff?text=Avatar'); /* Placeholder image */
+    background-size: cover;
+    background-position: center;
+}
+ .change-avatar-link {
+    color: var(--text-link);
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500; /* font-medium */
+    cursor: pointer;
+    transition: color 0.3s ease;
+ }
+ .change-avatar-link:hover {
+     color: #8a8aff;
+ }
+
+/* Profile Menu List */
+.profile-menu {
+    margin: 0 1rem; /* mx-4 */
+    background-color: var(--background-dark); /* Same as body */
+    /* Optional: Add card background if needed: background-color: var(--card-bg); border-radius: 0.5rem; padding: 0.5rem 0; */
+}
+.profile-menu-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1rem; /* py-4 px-4 */
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    color: var(--text-primary);
+    text-decoration: none; /* For links */
+}
+.profile-menu-item:last-child {
+    border-bottom: none;
+}
+.profile-menu-item:hover {
+     background-color: rgba(255, 255, 255, 0.05); /* Subtle hover */
+}
+.profile-menu-item i.menu-icon {
+    font-size: 1.125rem; /* text-lg */
+    color: var(--icon-color);
+    width: 24px; /* Fixed width for alignment */
+    text-align: center;
+    margin-right: 1rem; /* mr-4 */
+}
+.profile-menu-item .menu-text {
+    flex-grow: 1;
+    font-size: 0.95rem; /* Slightly larger than text-sm */
+    font-weight: 500;
+}
+.profile-menu-item .sub-link {
+    display: block; /* Make sub-link appear below */
+    font-size: 0.8rem; /* text-xs */
+    color: var(--text-link);
+    margin-top: 0.125rem; /* mt-0.5 */
+}
+.profile-menu-item .sub-link:hover {
+    color: #8a8aff;
+}
+
+/* Dark Mode Toggle Switch */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px; /* Adjust size */
+    height: 24px;
+}
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--toggle-bg-off);
+    transition: .4s;
+    border-radius: 24px; /* height */
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px; /* Knob size */
+    width: 18px;
+    left: 3px; /* Padding */
+    bottom: 3px;
+    background-color: var(--toggle-knob);
+    transition: .4s;
+    border-radius: 50%;
+}
+input:checked + .slider {
+    background-color: var(--toggle-bg-on);
+}
+input:checked + .slider:before {
+    transform: translateX(20px); /* width - height */
+}
+
+/* Bottom Navigation */
+ .bottom-nav {
+     position: fixed;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     background-color: var(--card-bg); /* Use card background */
+     border-top: 1px solid var(--border-color);
+     display: flex;
+     justify-content: space-around;
+     padding: 0.5rem 0; /* py-2 */
+     box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* Optional shadow */
+ }
+ .nav-item {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     text-decoration: none;
+     color: var(--icon-color); /* Use icon color */
+     font-size: 0.75rem; /* text-xs */
+     padding: 0.25rem 0.5rem; /* p-1 px-2 */
+     transition: color 0.2s ease;
+     border: none; /* Remove button border */
+     background: none; /* Remove button background */
+     cursor: pointer;
+ }
+ .nav-item.active, .nav-item:hover {
+     color: var(--text-primary); /* Highlight active/hover */
+ }
+ .nav-item i {
+     font-size: 1.25rem; /* text-xl */
+     margin-bottom: 0.125rem; /* mb-0.5 */
+ }

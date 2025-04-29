@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Gemini United Insurance</title>
+    <link href="styles/profile.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="profile-header">
+        <img src="https://via.placeholder.com/128" alt="Profile avatar" class="profile-avatar">
+        <h1 class="text-xl font-semibold">John Doe</h1>
+        <p class="text-gray-400">Insurance Agent</p>
+        <button class="edit-profile-btn mt-4">
+            <i class="fas fa-edit mr-2"></i>
+            Edit Profile
+        </button>
+        
+        <div class="profile-stats">
+            <div class="stat-item">
+                <div class="stat-number">245</div>
+                <div class="stat-label">Claims</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">1.2K</div>
+                <div class="stat-label">Clients</            </div>
+            <div class="stat-item">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Success</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-tabs">
+        <div class="tab active" data-content="posts">Posts</div>
+        <div class="tab" data-content="claims">Claims</div>
+        <div class="tab" data-content="about">About</div>
+    </div>
+
+    <main class="max-w-4xl mx-auto px-4">
+        <div id="posts" class="content-section">
+            <!-- Post content similar to home.html -->
+            <div class="post-card">
+                <div class="post-header">
+                    <img src="https://via.placeholder.com/40" alt="User avatar" class="post-avatar">
+                    <div class="post-meta">
+                        <div class="post-author">John Doe</div>
+                        <div class="post-time">2 hours ago</div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    Successfully processed another claim today! #Insurance #Success
+                </div>
+                <div class="post-actions">
+                    <button class="action-button like-button"><i class="far fa-heart"></i></button>
+                    <button class="action-button comment-button"><i class="far fa-comment"></i></button>
+                    <button class="action-button share-button"><i class="far fa-share-square"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="claims" class="content-section" style="display: none;">
+            <h2 class="text-xl font-semibold mb-4">Recent Claims</h2>
+            <!-- Claims list will go here -->
+        </div>
+
+        <div id="about" class="content-section" style="display: none;">
+            <h2 class="text-xl font-semibold mb-4">About Me</h2>
+            <p>Dedicated insurance agent with over 5 years of experience in claims processing and customer service.</p>
+        </div>
+    </main>
+
+    <nav class="fixed bottom-0 left-0 right-0 bg-gray-900 p-4 flex justify-center space-x-8">
+        <a href="home.html" class="text-gray-400 hover:text-white"><i class="fas fa-home"></i></a>
+        <a href="notifications.html" class="text-gray-400 hover:text-white"><i class="fas fa-bell"></i></a>
+        <a href="profile.html" class="text-gray-400 hover:text-white"><i class="fas fa-user"></i></a>
+        <a href="dms.html" class="text-gray-400 hover:text-white"><i class="fas fa-envelope"></i></a>
+    </nav>
+
+    <script src="scripts/profile.js"></script>
+</body>
+</html>

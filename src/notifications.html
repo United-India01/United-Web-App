@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - Gemini United Insurance</title>
+    <link href="styles/notifications.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="flex justify-between items-center max-w-4xl mx-auto p-4">
+            <h1 class="text-xl font-semibold">Notifications</h1>
+            <button id="markAllRead" class="text-sm text-blue-500 hover:underline">
+                Mark all as read
+            </button>
+        </div>
+    </header>
+
+    <div class="filter-buttons">
+        <button class="filter-button active" data-filter="all">All</button>
+        <button class="filter-button" data-filter="claim">Claims</button>
+        <button class="filter-button" data-filter="message">Messages</button>
+        <button class="filter-button" data-filter="system">System</button>
+    </div>
+
+    <main class="max-w-4xl mx-auto px-4">
+        <!-- Sample notifications -->
+        <div class="notification-item unread" data-id="1" data-type="claim">
+            <img src="https://via.placeholder.com/48" alt="User avatar" class="notification-avatar">
+            <div class="notification-content">
+                <p class="notification-text">
+                    <strong>Jane Smith</strong> submitted a new claim for review
+                </p>
+                <span class="notification-time">2 hours ago</span>
+                <a href="#" class="notification-action">View Claim</a>
+            </div>
+        </div>
+
+        <div class="notification-item" data-id="2" data-type="message">
+            <img src="https://via.placeholder.com/48" alt="User avatar" class="notification-avatar">
+            <div class="notification-content">
+                <p class="notification-text">
+                    <strong>John Doe</strong> sent you a message
+                </p>
+                <span class="notification-time">5 hours ago</span>
+                <a href="dms.html" class="notification-action">View Message</a>
+            </div>
+        </div>
+
+        <div class="notification-item unread" data-id="3" data-type="system">
+            <img src="https://via.placeholder.com/48" alt="System notification" class="notification-avatar">
+            <div class="notification-content">
+                <p class="notification-text">
+                    System maintenance scheduled for tonight at 11 PM
+                </p>
+                <span class="notification-time">1 day ago</span>
+            </div>
+        </div>
+    </main>
+
+    <nav class="fixed bottom-0 left-0 right-0 bg-gray-900 p-4 flex justify-center space-x-8">
+        <a href="home.html" class="text-gray-400 hover:text-white"><i class="fas fa-home"></i></a>
+        <a href="notifications.html" class="text-gray-400 hover:text-white"><i class="fas fa-bell"></i></a>
+        <a href="profile.html" class="text-gray-400 hover:text-white"><i class="fas fa-user"></i></a>
+        <a href="dms.html" class="text-gray-400 hover:text-white"><i class="fas fa-envelope"></i></a>
+    </nav>
+
+    <script src="scripts/notifications.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post - Gemini United Insurance</title>
+    <link href="styles/post_detail.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="flex justify-between items-center max-w-4xl mx-auto p-4">
+            <a href="home.html" class="text-gray-400 hover:text-white">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4">
+        <article class="post-container">
+            <div class="post-header">
+                <img src="https://via.placeholder.com/56" alt="Author avatar" class="post-author-avatar">
+                <div class="post-meta">
+                    <div class="post-author-name">Jane Smith</div>
+                    <div class="post-time">2 hours ago</div>
+                </div>
+            </div>
+
+            <h1 class="post-title">New Health Insurance Policy Updates</h1>
+
+            <div class="post-content">
+                <p>We're excited to announce updates to our health insurance policies that will benefit all our customers. These changes include improved coverage for preventive care and mental health services.</p>
+                <img src="https://via.placeholder.com/800x400" alt="Policy update image" class="post-image">
+                <p>The new policies will take effect from next month. Stay tuned for more details or contact your insurance agent for specific information about your policy.</p>
+            </div>
+
+            <div class="post-tags">
+                <span class="post-tag">#HealthInsurance</span>
+                <span class="post-tag">#PolicyUpdate</span>
+                <span class="post-tag">#Healthcare</span>
+            </div>
+
+            <div class="post-actions">
+                <button class="action-button like-button">
+                    <i class="far fa-heart"></i>
+                    <span class="action-count">42</span>
+                </button>
+                <button class="action-button">
+                    <i class="far fa-comment"></i>
+                    <span class="comments-count action-count">12</span>
+                </button>
+                <button class="action-button share-button">
+                    <i class="far fa-share-square"></i>
+                    <span class="action-count">8</span>
+                </button>
+            </div>
+
+            <section class="comments-section">
+                <h2 class="comments-header">Comments</h2>
+                
+                <form class="comment-form">
+                    <textarea class="comment-input" placeholder="Write a comment..." required></textarea>
+                    <button type="submit" class="btn-login">Post Comment</button>
+                </form>
+
+                <div class="comments-list">
+                    <!-- Sample comments -->
+                    <div class="comment-item">
+                        <img src="https://via.placeholder.com/40" alt="User avatar" class="comment-avatar">
+                        <div class="comment-content">
+                            <div class="comment-author">John Doe</div>
+                            <div class="comment-text">This is great news! Looking forward to the improved coverage.</div>
+                            <div class="comment-time">1 hour ago</div>
+                            <div class="comment-actions">
+                                <span class="comment-action">Like</span>
+                                <span class="comment-action">Reply</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment-item">
+                        <img src="https://via.placeholder.com/40" alt="User avatar" class="comment-avatar">
+                        <div class="comment-content">
+                            <div class="comment-author">Sarah Wilson</div>
+                            <div class="comment-text">Will these changes affect existing policies?</div>
+                            <div class="comment-time">2 hours ago</div>
+                            <div class="comment-actions">
+                                <span class="comment-action">Like</span>
+                                <span class="comment-action">Reply</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <nav class="fixed bottom-0 left-0 right-0 bg-gray-900 p-4 flex justify-center space-x-8">
+        <a href="home.html" class="text-gray-400 hover:text-white"><i class="fas fa-home"></i></a>
+        <a href="notifications.html" class="text-gray-400 hover:text-white"><i class="fas fa-bell"></i></a>
+        <a href="profile.html" class="text-gray-400 hover:text-white"><i class="fas fa-user"></i></a>
+        <a href="dms.html" class="text-gray-400 hover:text-white"><i class="fas fa-envelope"></i></a>
+    </nav>
+
+    <script src="scripts/post_detail.js"></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+/* Apply Inter font globally */
+body {
+    font-family: 'Inter', sans-serif;
+    /* Define dark theme colors consistent with others */
+    --background-dark: #1a1a2e;
+    --card-bg: #2a2a4e;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0e0;
+    --text-link: #6a6aff;
+    --border-color: #4a4a8e;
+    --icon-color: #a0a0e0;
+    --follow-button-bg: #6a6aff;
+    --follow-button-text: #ffffff;
+    --follow-button-hover-bg: #5a5aff;
+    --followed-button-bg: var(--card-bg);
+    --followed-button-text: var(--text-secondary);
+    --followed-button-border: var(--border-color);
+}
+/* Dark theme setup */
+html, body {
+    background-color: var(--background-dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+/* Top Header */
+.app-header {
+    background-color: var(--card-bg); /* Use card background for header */
+    padding: 1rem 1.5rem; /* py-4 px-6 */
+    text-align: center;
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 600; /* font-semibold */
+    border-bottom: 1px solid var(--border-color);
+    position: sticky; top: 0; z-index: 20;
+    flex-shrink: 0;
+}
+
+/* Main Content Area */
+.main-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-bottom: 1rem; /* Add padding at the bottom */
+}
+
+/* Notification Group Styling */
+.notification-group {
+    margin-top: 1rem; /* mt-4 */
+}
+.group-header {
+    font-size: 1rem; /* text-base */
+    font-weight: 600; /* font-semibold */
+    padding: 0.5rem 1rem; /* py-2 px-4 */
+    color: var(--text-primary);
+}
+
+/* Notification Item Styling */
+.notification-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem; /* py-3 px-4 */
+    gap: 0.75rem; /* gap-3 */
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color); /* Separator */
+}
+ .notification-item:last-child {
+     border-bottom: none; /* Remove border for last item in group potentially */
+ }
+.notification-item:hover {
+    background-color: rgba(255, 255, 255, 0.03); /* Subtle hover */
+}
+.notification-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--card-bg); /* Placeholder background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 1px solid var(--border-color);
+}
+.notification-avatar img {
+    width: 100%; height: 100%; object-fit: cover;
+}
+.notification-content {
+    flex-grow: 1;
+    font-size: 0.875rem; /* text-sm */
+    line-height: 1.4;
+}
+.notification-content strong {
+    font-weight: 600; /* font-semibold */
+    color: var(--text-primary);
+}
+.notification-time {
+    color: var(--text-secondary);
+    margin-left: 0.25rem; /* ml-1 */
+    font-size: 0.8rem; /* text-xs */
+}
+.notification-thumbnail {
+    width: 40px;
+    height: 40px;
+    border-radius: 0.25rem; /* rounded-sm */
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid var(--border-color);
+}
+.notification-action button {
+    font-size: 0.8rem; /* text-xs */
+    font-weight: 500;
+    padding: 0.375rem 0.75rem; /* py-1.5 px-3 */
+    border-radius: 0.375rem; /* rounded-md */
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    margin-left: 0.5rem; /* ml-2 */
+    flex-shrink: 0;
+}
+.follow-btn {
+    background-color: var(--follow-button-bg);
+    color: var(--follow-button-text);
+    border: none;
+}
+.follow-btn:hover { background-color: var(--follow-button-hover-bg); }
+.following-btn {
+     background-color: var(--followed-button-bg);
+     color: var(--followed-button-text);
+     border: 1px solid var(--followed-button-border);
+}
+.following-btn:hover { border-color: var(--text-secondary); }
+
+
+/* Bottom Navigation (Reusing styles) */
+.bottom-nav {
+     position: fixed; bottom: 0; left: 0; right: 0;
+     background-color: var(--card-bg); border-top: 1px solid var(--border-color);
+     display: flex; justify-content: space-around; padding: 0.5rem 0;
+     box-shadow: 0 -2px 5px rgba(0,0,0,0.1); z-index: 10; flex-shrink: 0;
+}
+.nav-item {
+     display: flex; flex-direction: column; align-items: center; text-decoration: none;
+     color: var(--icon-color); font-size: 0.75rem; padding: 0.25rem 0.5rem;
+     transition: color 0.2s ease; border: none; background: none; cursor: pointer;
+}
+.nav-item.active, .nav-item:hover { color: var(--text-primary); }
+.nav-item i { font-size: 1.25rem; margin-bottom: 0.125rem; }

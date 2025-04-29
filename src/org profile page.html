@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini United Insurance - Organization Profile</title>
+    <link href="styles/org_profile.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <img src="https://via.placeholder.com/1200x200" alt="Organization cover" class="org-cover">
+        <div class="org-header">
+            <img src="https://via.placeholder.com/120" alt="Organization logo" class="org-logo">
+            <h1 class="org-name">Gemini United Insurance</h1>
+            <p class="org-description">A leading insurance provider committed to protecting what matters most. Offering comprehensive coverage solutions for individuals and businesses.</p>
+            
+            <div class="quick-info">
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>New York, NY</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-globe"></i>
+                    <span>www.geminiunitedinsurance.com</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <span>1-800-GEMINI-1</span>
+                </div>
+            </div>
+
+            <div class="org-stats">
+                <div class="stat-item">
+                    <div class="stat-number followers-count">25.6K</div>
+                    <div class="stat-label">Followers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Insurance Plans</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Customer Satisfaction</div>
+                </div>
+            </div>
+
+            <div class="contact-buttons">
+                <button class="contact-button primary-button follow-button">
+                    <i class="fas fa-user-plus"></i>
+                    <span class="follow-text">Follow</span>
+                </button>
+                <a href="mailto:contact@geminiunitedinsurance.com" class="contact-button secondary-button contact-email">
+                    <i class="fas fa-envelope"></i>
+                    <span>Email</span>
+                </a>
+                <button class="contact-button secondary-button contact-chat">
+                    <i class="fas fa-comment"></i>
+                    <span>Chat</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="org-tabs">
+        <div class="tab active" data-content="policies">Policies</div>
+        <div class="tab" data-content="about">About</div>
+        <div class="tab" data-content="team">Team</div>
+    </div>
+
+    <main class="max-w-4xl mx-auto px-4">
+        <div id="policies" class="content-section">
+            <h2 class="section-title">Insurance Policies</h2>
+            <div class="policy-grid">
+                <!-- Sample policy cards -->
+                <div class="policy-card" data-policy-id="1">
+                    <h3 class="policy-title">Health Insurance Premium</h3>
+                    <p class="policy-description">Comprehensive health coverage including preventive care, prescriptions, and mental health services.</p>
+                    <div class="policy-meta">
+                        <span>Starting at $199/mo</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+
+                <div class="policy-card" data-policy-id="2">
+                    <h3 class="policy-title">Life Insurance Plus</h3>
+                    <p class="policy-description">Secure your family's future with our comprehensive life insurance coverage.</p>
+                    <div class="policy-meta">
+                        <span>Starting at $79/mo</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+
+                <div class="policy-card" data-policy-id="3">
+                    <h3 class="policy-title">Auto Insurance Complete</h3>
+                    <p class="policy-description">Full coverage for your vehicle including liability, collision, and comprehensive protection.</p>
+                    <div class="policy-meta">
+                        <span>Custom Quote</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="about" class="content-section" style="display: none;">
+            <h2 class="section-title">About Us</h2>
+            <div class="content-text">
+                <p>Gemini United Insurance has been protecting individuals and businesses for over 50 years. Our commitment to excellent service and comprehensive coverage has made us one of the most trusted names in insurance.</p>
+                <p>We believe in:</p>
+                <ul>
+                    <li>Transparent and fair pricing</li>
+                    <li>24/7 customer support</li>
+                    <li>Quick and hassle-free claims process</li>
+                    <li>Customized insurance solutions</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="team" class="content-section" style="display: none;">
+            <h2 class="section-title">Our Leadership Team</h2>
+            <div class="team-grid">
+                <!-- Sample team members -->
+                <div class="team-member" data-user-id="1">
+                    <img src="https://via.placeholder.com/100" alt="Team member" class="member-avatar">
+                    <div class="member-name">Sarah Johnson</div>
+                    <div class="member-role">CEO</div>
+                </div>
+
+                <div class="team-member" data-user-id="2">
+                    <img src="https://via.placeholder.com/100" alt="Team member" class="member-avatar">
+                    <div class="member-name">Michael Chen</div>
+                    <div class="member-role">Head of Claims</div>
+                </div>
+
+                <div class="team-member" data-user-id="3">
+                    <img src="https://via.placeholder.com/100" alt="Team member" class="member-avatar">
+                    <div class="member-name">Emily Rodriguez</div>
+                    <div class="member-role">Customer Relations</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <nav class="fixed bottom-0 left-0 right-0 bg-gray-900 p-4 flex justify-center space-x-8">
+        <a href="home.html" class="text-gray-400 hover:text-white"><i class="fas fa-home"></i></a>
+        <a href="notifications.html" class="text-gray-400 hover:text-white"><i class="fas fa-bell"></i></a>
+        <a href="profile.html" class="text-gray-400 hover:text-white"><i class="fas fa-user"></i></a>
+        <a href="dms.html" class="text-gray-400 hover:text-white"><i class="fas fa-envelope"></i></a>
+    </nav>
+
+    <script src="scripts/org_profile.js"></script>
+</body>
+</html>

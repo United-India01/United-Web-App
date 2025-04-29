@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Gemini United Insurance</title>
+    <link href="styles/main.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <main class="w-full max-w-md mx-auto p-6 bg-opacity-30 backdrop-blur-lg rounded-lg shadow-xl">
+        <h1 class="text-2xl font-semibold text-center mb-6">Login to Gemini United</h1>
+        
+        <form id="loginForm" class="space-y-4">
+            <div>
+                <label for="aadhaar" class="block text-sm font-medium mb-1">Aadhaar Number</label>
+                <input type="text" id="aadhaar" name="aadhaar" class="dark-input" placeholder="Enter your 12-digit Aadhaar number" maxlength="12" pattern="\d{12}" required>
+            </div>
+            
+            <div>
+                <label for="password" class="block text-sm font-medium mb-1">Password</label>
+                <input type="password" id="password" name="password" class="dark-input" placeholder="Enter your password" required>
+            </div>
+            
+            <div class="flex items-center justify-between mt-4">
+                <div class="flex items-center">
+                    <input type="checkbox" id="remember" class="h-4 w-4 rounded border-gray-300">
+                    <label for="remember" class="ml-2 block text-sm">Remember me</label>
+                </div>
+                <a href="#" class="forgot-link">Forgot password?</a>
+            </div>
+            
+            <button type="submit" class="btn-login mt-4">Login</button>
+        </form>
+        
+        <div class="mt-4">
+            <button id="guestModeButton" class="btn-guest">
+                <i class="fas fa-user-circle"></i>
+                Continue as Guest
+            </button>
+        </div>
+        
+        <nav class="mt-6 flex justify-center space-x-4">
+            <a href="home.html" class="text-gray-400 hover:text-white"><i class="fas fa-home"></i></a>
+            <a href="notifications.html" class="text-gray-400 hover:text-white"><i class="fas fa-bell"></i></a>
+            <a href="profile.html" class="text-gray-400 hover:text-white"><i class="fas fa-user"></i></a>
+            <a href="dms.html" class="text-gray-400 hover:text-white"><i class="fas fa-envelope"></i></a>
+        </nav>
+    </main>
+    <script src="scripts/login.js"></script>
+</body>
+</html>

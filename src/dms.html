@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Gemini United Insurance</title>
+    <link href="styles/dms.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="flex justify-between items-center max-w-4xl mx-auto p-4">
+            <h1 class="text-xl font-semibold">Messages</h1>
+        </div>
+    </header>
+
+    <div class="chat-list">
+        <!-- Sample chat list -->
+        <div class="chat-item active" data-user-id="1">
+            <img src="https://via.placeholder.com/48" alt="User avatar" class="chat-avatar">
+            <div class="chat-info">
+                <div class="chat-name">Jane Smith</div>
+                <div class="chat-preview">I have a question about my claim...</div>
+            </div>
+        </div>
+        <div class="chat-item" data-user-id="2">
+            <img src="https://via.placeholder.com/48" alt="User avatar" class="chat-avatar">
+            <div class="chat-info">
+                <div class="chat-name">John Doe</div>
+                <div class="chat-preview">Thanks for your help!</div>
+            </div>
+        </div>
+        <div class="chat-item" data-user-id="3">
+            <img src="https://via.placeholder.com/48" alt="User avatar" class="chat-avatar">
+            <div class="chat-info">
+                <div class="chat-name">Support Team</div>
+                <div class="chat-preview">How can we assist you today?</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-content">
+        <div class="chat-header p-4 border-b border-gray-700">
+            <div class="chat-header-name font-semibold">Jane Smith</div>
+        </div>
+
+        <div class="message-list">
+            <!-- Messages will be loaded dynamically -->
+        </div>
+
+        <div class="message-input-container">
+            <form class="message-input-form">
+                <input type="text" class="message-input" placeholder="Type a message..." required>
+                <button type="submit" class="send-button">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <nav class="fixed bottom-0 left-0 right-0 bg-gray-900 p-4 flex justify-center space-x-8">
+        <a href="home.html" class="text-gray-400 hover:text-white"><i class="fas fa-home"></i></a>
+        <a href="notifications.html" class="text-gray-400 hover:text-white"><i class="fas fa-bell"></i></a>
+        <a href="profile.html" class="text-gray-400 hover:text-white"><i class="fas fa-user"></i></a>
+        <a href="dms.html" class="text-gray-400 hover:text-white"><i class="fas fa-envelope"></i></a>
+    </nav>
+
+    <script src="scripts/dms.js"></script>
+</body>
+</html>

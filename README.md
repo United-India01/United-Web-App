@@ -15,12 +15,12 @@ gemini-united-project/
 
 ## Pages
 - [Home Page](/src/home.html)
-- Login
-- Profile
-- Organization Profile
-- Notifications
-- Direct Messages
-- Upload
+- [Login Page](/src/login.html)
+- [Profile Page](/src/profile.html)
+- [Organization Profile](/src/org.html)
+- [Notifications](/src/notifications.html)
+- [Direct Messages](/src/dms.html)
+- [Upload](/src/upload.html)
 - Post Detail
 
 ## Technologies Used

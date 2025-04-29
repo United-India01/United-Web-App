@@ -344,12 +344,12 @@
                 followButton.classList.remove('following');
                 followButton.textContent = 'Follow';
                 console.log('Unfollowed');
-                alert('Unfollowed Organization (Simulation)');
+                // alert('Unfollowed Organization (Simulation)');
             } else {
                 followButton.classList.add('following');
                 followButton.textContent = 'Following';
                 console.log('Followed');
-                 alert('Followed Organization (Simulation)');
+                 // alert('Followed Organization (Simulation)');
             }
         });
 
@@ -358,16 +358,16 @@
              const icon = bookmarkButton.querySelector('i');
              if (icon.classList.contains('far')) {
                  icon.classList.replace('far', 'fas');
-                 alert('Organization Bookmarked (Simulation)');
+                 // alert('Organization Bookmarked (Simulation)');
              } else {
                  icon.classList.replace('fas', 'far');
-                 alert('Organization Unbookmarked (Simulation)');
+                 // alert('Organization Unbookmarked (Simulation)');
              }
          });
 
          filterButton.addEventListener('click', () => {
             console.log('Filter button clicked');
-            alert('Placeholder: Show filter options for org posts/reviews.');
+            // alert('Placeholder: Show filter options for org posts/reviews.');
         });
 
     </script>

@@ -367,7 +367,7 @@
                 const tagName = newTagName.trim();
                 // Check if tag already exists
                 if (Array.from(tagsContainer.querySelectorAll('.tag-item')).some(el => el.getAttribute('data-tag').toLowerCase() === tagName.toLowerCase())) {
-                    alert("Tag already exists!");
+                    // alert("Tag already exists!");
                     return;
                 }
 
@@ -434,7 +434,7 @@
                 }
             }
 
-            alert('Simulating post creation. Check console for data.');
+            // alert('Simulating post creation. Check console for data.');
             // Here you would typically send formData via fetch to your backend API
             // fetch('/api/posts', { method: 'POST', body: formData })
             //  .then(...)
@@ -456,14 +456,14 @@
         fileInput.addEventListener('change', (e) => {
             if (e.target.files.length > 0) {
                 console.log('File selected:', e.target.files[0].name);
-                alert(`File selected: ${e.target.files[0].name} (Simulation)`);
+                // alert(`File selected: ${e.target.files[0].name} (Simulation)`);
                 // Add visual indicator if needed
             }
         });
          imageInput.addEventListener('change', (e) => {
              if (e.target.files.length > 0) {
                 console.log('Image selected:', e.target.files[0].name);
-                 alert(`Image selected: ${e.target.files[0].name} (Simulation)`);
+                 // alert(`Image selected: ${e.target.files[0].name} (Simulation)`);
                 // Add visual indicator or preview if needed
             }
         });

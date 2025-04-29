@@ -372,12 +372,12 @@
 
         menuButton.addEventListener('click', () => {
             console.log('Menu button clicked');
-            alert('Placeholder: Show side menu.');
+            // alert('Placeholder: Show side menu.');
         });
 
         filterButton.addEventListener('click', () => {
             console.log('Filter button clicked');
-            alert('Placeholder: Show filter options.');
+            // alert('Placeholder: Show filter options.');
         });
 
         // Add listeners to dynamically added elements (like buttons in posts)
@@ -392,15 +392,15 @@
                     // Add logic to update count and potentially send API request
                     const countSpan = actionButton.querySelector('.count');
                     if (countSpan) countSpan.textContent = parseInt(countSpan.textContent) + 1; // Simulate update
-                    alert('Upvoted (Simulation)');
+                    // alert('Upvoted (Simulation)');
                 } else if (actionButton.classList.contains('downvote-btn')) {
                     console.log('Downvote clicked');
                     const countSpan = actionButton.querySelector('.count');
                      if (countSpan) countSpan.textContent = parseInt(countSpan.textContent) + 1; // Simulate update
-                    alert('Downvoted (Simulation)');
+                    // alert('Downvoted (Simulation)');
                 } else if (actionButton.classList.contains('share-btn')) {
                     console.log('Share clicked');
-                    alert('Placeholder: Show sharing options.');
+                    // alert('Placeholder: Show sharing options.');
                 }
             }
 
@@ -408,7 +408,7 @@
              const optionsButton = target.closest('.options-button');
              if (optionsButton) {
                  console.log('Options clicked');
-                 alert('Placeholder: Show post options menu.');
+                 // alert('Placeholder: Show post options menu.');
              }
         });
 

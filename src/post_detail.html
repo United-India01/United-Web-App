@@ -314,15 +314,15 @@
                     console.log('Upvote clicked');
                     const countSpan = actionButton.querySelector('.count');
                     if (countSpan) countSpan.textContent = parseInt(countSpan.textContent) + 1;
-                    alert('Upvoted (Simulation)');
+                    // alert('Upvoted (Simulation)');
                 } else if (actionButton.classList.contains('downvote-btn')) {
                     console.log('Downvote clicked');
                     const countSpan = actionButton.querySelector('.count');
                     if (countSpan) countSpan.textContent = parseInt(countSpan.textContent) + 1;
-                    alert('Downvoted (Simulation)');
+                    // alert('Downvoted (Simulation)');
                 } else if (actionButton.classList.contains('share-btn')) {
                     console.log('Share clicked');
-                    alert('Placeholder: Show sharing options.');
+                    // alert('Placeholder: Show sharing options.');
                 }
             }
 
@@ -335,11 +335,11 @@
                 if (icon.classList.contains('far')) { // If outline
                     icon.classList.remove('far');
                     icon.classList.add('fas'); // Make solid
-                    alert('Post Bookmarked (Simulation)');
+                    // alert('Post Bookmarked (Simulation)');
                 } else { // If solid
                     icon.classList.remove('fas');
                     icon.classList.add('far'); // Make outline
-                     alert('Post Unbookmarked (Simulation)');
+                     // alert('Post Unbookmarked (Simulation)');
                 }
             }
 
@@ -348,7 +348,7 @@
              if (readMoreLink) {
                  event.preventDefault(); // Prevent default link behavior
                  console.log('Read more clicked');
-                 alert('Placeholder: Expand post text or navigate.');
+                 // alert('Placeholder: Expand post text or navigate.');
                  // Add logic to expand text or load full content
              }
         });
@@ -357,7 +357,7 @@
          const filterButton = document.getElementById('filterButton');
          filterButton.addEventListener('click', () => {
             console.log('Filter button clicked');
-            alert('Placeholder: Show filter options.');
+            // alert('Placeholder: Show filter options.');
         });
 
 

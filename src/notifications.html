@@ -284,13 +284,13 @@
 
                 // Placeholder navigation logic
                 if (type === 'follow' && userId) {
-                    alert(`Simulating navigation to profile: ${userId}`);
+                    // alert(`Simulating navigation to profile: ${userId}`);
                     // window.location.href = `profile.html?user=${userId}`; // Example
                 } else if (postId) {
-                     alert(`Simulating navigation to post: ${postId}`);
+                     // alert(`Simulating navigation to post: ${postId}`);
                      // window.location.href = `post_detail.html?post=${postId}`; // Example
                 } else {
-                    alert('Clicked a notification.');
+                    // alert('Clicked a notification.');
                 }
             }
 
@@ -301,7 +301,7 @@
                 followButton.textContent = 'Following';
                 followButton.classList.remove('follow-btn');
                 followButton.classList.add('following-btn');
-                alert('Followed back (Simulation)');
+                // alert('Followed back (Simulation)');
                 // Add API call logic here
             }
 
@@ -311,7 +311,7 @@
                  followingButton.textContent = 'Follow';
                  followingButton.classList.remove('following-btn');
                  followingButton.classList.add('follow-btn');
-                 alert('Unfollowed (Simulation)');
+                 // alert('Unfollowed (Simulation)');
                  // Add API call logic here
             }
 

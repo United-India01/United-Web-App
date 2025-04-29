@@ -14,7 +14,7 @@ gemini-united-project/
 ```
 
 ## Pages
-- Home
+- [Home Page](/src/home.html)
 - Login
 - Profile
 - Organization Profile

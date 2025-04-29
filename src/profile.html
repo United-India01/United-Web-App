@@ -3,82 +3,314 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - Gemini United Insurance</title>
-    <link href="styles/profile.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Profile - United India Insurance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Apply Inter font globally */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Define dark theme colors based on login/profile images */
+            --background-dark: #1a1a2e; /* Dark blue/purple */
+            --card-bg: #2a2a4e; /* Slightly lighter background for elements */
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0e0; /* Lighter text */
+            --text-link: #6a6aff; /* Blue link color */
+            --border-color: #4a4a8e;
+            --icon-color: #a0a0e0; /* Color for menu icons */
+            --toggle-bg-off: #4a4a8e;
+            --toggle-bg-on: #6a6aff;
+            --toggle-knob: #ffffff;
+        }
+        /* Dark theme setup */
+        html, body {
+            background-color: var(--background-dark);
+            color: var(--text-primary);
+            padding-bottom: 70px; /* Add padding for bottom nav */
+        }
+        /* Profile Avatar Section */
+        .profile-avatar-section {
+            padding: 2rem 1rem; /* py-8 px-4 */
+            text-align: center;
+        }
+        .profile-avatar {
+            width: 100px; /* Adjust size as needed */
+            height: 100px;
+            border-radius: 50%;
+            background-color: var(--card-bg); /* Placeholder background */
+            margin: 0 auto 1rem; /* Center and add bottom margin */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 3px solid var(--border-color);
+            /* Placeholder for 3D avatar - replace with actual image/component */
+            background-image: url('https://placehold.co/100x100/2a2a4e/ffffff?text=Avatar'); /* Placeholder image */
+            background-size: cover;
+            background-position: center;
+        }
+         .change-avatar-link {
+            color: var(--text-link);
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 500; /* font-medium */
+            cursor: pointer;
+            transition: color 0.3s ease;
+         }
+         .change-avatar-link:hover {
+             color: #8a8aff;
+         }
+
+        /* Profile Menu List */
+        .profile-menu {
+            margin: 0 1rem; /* mx-4 */
+            background-color: var(--background-dark); /* Same as body */
+            /* Optional: Add card background if needed: background-color: var(--card-bg); border-radius: 0.5rem; padding: 0.5rem 0; */
+        }
+        .profile-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1rem; /* py-4 px-4 */
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            color: var(--text-primary);
+            text-decoration: none; /* For links */
+        }
+        .profile-menu-item:last-child {
+            border-bottom: none;
+        }
+        .profile-menu-item:hover {
+             background-color: rgba(255, 255, 255, 0.05); /* Subtle hover */
+        }
+        .profile-menu-item i.menu-icon {
+            font-size: 1.125rem; /* text-lg */
+            color: var(--icon-color);
+            width: 24px; /* Fixed width for alignment */
+            text-align: center;
+            margin-right: 1rem; /* mr-4 */
+        }
+        .profile-menu-item .menu-text {
+            flex-grow: 1;
+            font-size: 0.95rem; /* Slightly larger than text-sm */
+            font-weight: 500;
+        }
+        .profile-menu-item .sub-link {
+            display: block; /* Make sub-link appear below */
+            font-size: 0.8rem; /* text-xs */
+            color: var(--text-link);
+            margin-top: 0.125rem; /* mt-0.5 */
+        }
+        .profile-menu-item .sub-link:hover {
+            color: #8a8aff;
+        }
+
+        /* Dark Mode Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 44px; /* Adjust size */
+            height: 24px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--toggle-bg-off);
+            transition: .4s;
+            border-radius: 24px; /* height */
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px; /* Knob size */
+            width: 18px;
+            left: 3px; /* Padding */
+            bottom: 3px;
+            background-color: var(--toggle-knob);
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: var(--toggle-bg-on);
+        }
+        input:checked + .slider:before {
+            transform: translateX(20px); /* width - height */
+        }
+
+        /* Bottom Navigation */
+         .bottom-nav {
+             position: fixed;
+             bottom: 0;
+             left: 0;
+             right: 0;
+             background-color: var(--card-bg); /* Use card background */
+             border-top: 1px solid var(--border-color);
+             display: flex;
+             justify-content: space-around;
+             padding: 0.5rem 0; /* py-2 */
+             box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* Optional shadow */
+         }
+         .nav-item {
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             text-decoration: none;
+             color: var(--icon-color); /* Use icon color */
+             font-size: 0.75rem; /* text-xs */
+             padding: 0.25rem 0.5rem; /* p-1 px-2 */
+             transition: color 0.2s ease;
+             border: none; /* Remove button border */
+             background: none; /* Remove button background */
+             cursor: pointer;
+         }
+         .nav-item.active, .nav-item:hover {
+             color: var(--text-primary); /* Highlight active/hover */
+         }
+         .nav-item i {
+             font-size: 1.25rem; /* text-xl */
+             margin-bottom: 0.125rem; /* mb-0.5 */
+         }
+    </style>
 </head>
 <body>
-    <div class="profile-header">
-        <img src="https://via.placeholder.com/128" alt="Profile avatar" class="profile-avatar">
-        <h1 class="text-xl font-semibold">John Doe</h1>
-        <p class="text-gray-400">Insurance Agent</p>
-        <button class="edit-profile-btn mt-4">
-            <i class="fas fa-edit mr-2"></i>
-            Edit Profile
+
+    <div class="profile-avatar-section">
+        <div class="profile-avatar" id="profileAvatar">
+            </div>
+        <a href="#" id="changeAvatarLink" class="change-avatar-link">Change Avatar</a>
+    </div>
+
+    <div class="profile-menu">
+        <a href="#" id="accountInfoLink" class="profile-menu-item">
+            <i class="fas fa-user-edit menu-icon"></i> <span class="menu-text">Account Information</span>
+            <i class="fas fa-chevron-right text-xs text-gray-500"></i> </a>
+
+        <a href="#" id="accountActivitiesLink" class="profile-menu-item">
+            <i class="fas fa-history menu-icon"></i> <span class="menu-text">Account Activities</span>
+             <i class="fas fa-chevron-right text-xs text-gray-500"></i>
+        </a>
+
+        <div class="profile-menu-item">
+            <i class="fas fa-moon menu-icon"></i>
+            <span class="menu-text">Dark Mode</span>
+            <label class="toggle-switch ml-auto">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="profile-menu-item flex-col items-start"> <div class="flex items-center w-full"> <i class="fas fa-exclamation-circle menu-icon"></i>
+                <span class="menu-text">Bug Report/Suggestions</span>
+             </div>
+             <a href="#" id="getHelpLink" class="sub-link ml-10 mt-1">Get Help</a> </div>
+
+         <button id="logoutButton" class="profile-menu-item w-full text-left text-red-400 hover:text-red-500">
+            <i class="fas fa-sign-out-alt menu-icon"></i>
+            <span class="menu-text">Logout</span>
         </button>
-        
-        <div class="profile-stats">
-            <div class="stat-item">
-                <div class="stat-number">245</div>
-                <div class="stat-label">Claims</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">1.2K</div>
-                <div class="stat-label">Clients</            </div>
-            <div class="stat-item">
-                <div class="stat-number">98%</div>
-                <div class="stat-label">Success</div>
-            </div>
-        </div>
+
     </div>
 
-    <div class="profile-tabs">
-        <div class="tab active" data-content="posts">Posts</div>
-        <div class="tab" data-content="claims">Claims</div>
-        <div class="tab" data-content="about">About</div>
-    </div>
-
-    <main class="max-w-4xl mx-auto px-4">
-        <div id="posts" class="content-section">
-            <!-- Post content similar to home.html -->
-            <div class="post-card">
-                <div class="post-header">
-                    <img src="https://via.placeholder.com/40" alt="User avatar" class="post-avatar">
-                    <div class="post-meta">
-                        <div class="post-author">John Doe</div>
-                        <div class="post-time">2 hours ago</div>
-                    </div>
-                </div>
-                <div class="post-content">
-                    Successfully processed another claim today! #Insurance #Success
-                </div>
-                <div class="post-actions">
-                    <button class="action-button like-button"><i class="far fa-heart"></i></button>
-                    <button class="action-button comment-button"><i class="far fa-comment"></i></button>
-                    <button class="action-button share-button"><i class="far fa-share-square"></i></button>
-                </div>
-            </div>
-        </div>
-
-        <div id="claims" class="content-section" style="display: none;">
-            <h2 class="text-xl font-semibold mb-4">Recent Claims</h2>
-            <!-- Claims list will go here -->
-        </div>
-
-        <div id="about" class="content-section" style="display: none;">
-            <h2 class="text-xl font-semibold mb-4">About Me</h2>
-            <p>Dedicated insurance agent with over 5 years of experience in claims processing and customer service.</p>
-        </div>
-    </main>
-
-    <nav class="fixed bottom-0 left-0 right-0 bg-gray-900 p-4 flex justify-center space-x-8">
-        <a href="home.html" class="text-gray-400 hover:text-white"><i class="fas fa-home"></i></a>
-        <a href="notifications.html" class="text-gray-400 hover:text-white"><i class="fas fa-bell"></i></a>
-        <a href="profile.html" class="text-gray-400 hover:text-white"><i class="fas fa-user"></i></a>
-        <a href="dms.html" class="text-gray-400 hover:text-white"><i class="fas fa-envelope"></i></a>
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item">
+            <i class="fas fa-users"></i> </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-globe"></i> </a>
+        <a href="upload.html" class="nav-item">
+            <i class="fas fa-upload"></i> </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-bell"></i> </a>
+        <a href="profile.html" class="nav-item active">
+            <i class="fas fa-user-circle"></i> </a>
     </nav>
 
-    <script src="scripts/profile.js"></script>
+    <script>
+        console.log("profile.html (dark theme) script loaded.");
+
+        // Get interactive elements
+        const changeAvatarLink = document.getElementById('changeAvatarLink');
+        const accountInfoLink = document.getElementById('accountInfoLink');
+        const accountActivitiesLink = document.getElementById('accountActivitiesLink');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const getHelpLink = document.getElementById('getHelpLink');
+        const logoutButton = document.getElementById('logoutButton');
+
+        // --- Event Listener Placeholders ---
+
+        changeAvatarLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log('Change Avatar clicked');
+            alert('Placeholder: Open avatar selection.');
+            // Add logic to open file input or avatar library
+        });
+
+        accountInfoLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log('Account Information clicked');
+            alert('Placeholder: Navigate to Account Info page.');
+            // window.location.href = 'account_info.html'; // Example navigation
+        });
+
+        accountActivitiesLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log('Account Activities clicked');
+            alert('Placeholder: Navigate to Activities page.');
+            // window.location.href = 'account_activities.html'; // Example navigation
+        });
+
+        getHelpLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log('Get Help clicked');
+            alert('Placeholder: Navigate to Help/Support section.');
+            // window.location.href = 'support.html'; // Example navigation
+        });
+
+        // Dark Mode Toggle Logic (Basic Visual Simulation)
+        darkModeToggle.addEventListener('change', () => {
+            if (darkModeToggle.checked) {
+                console.log('Dark Mode ON');
+                // In a real app, you'd add a class to <body> or <html>
+                // document.documentElement.classList.add('dark');
+                alert('Dark Mode Enabled (Simulation)');
+            } else {
+                console.log('Dark Mode OFF');
+                // document.documentElement.classList.remove('dark');
+                 alert('Dark Mode Disabled (Simulation)');
+            }
+            // Add logic to save preference (e.g., localStorage)
+        });
+
+        // Logout Button Logic
+        logoutButton.addEventListener('click', (event) => {
+             console.log("Logout clicked");
+             if (confirm("Are you sure you want to logout?")) {
+                 console.log("Logging out...");
+                 // Add actual logout logic (e.g., clear session, redirect)
+                 window.location.href = 'login.html'; // Redirect to login page
+             }
+        });
+
+        // --- Initial Setup ---
+        // Check saved dark mode preference on load (example)
+        // const prefersDark = localStorage.getItem('darkMode') === 'enabled';
+        // darkModeToggle.checked = prefersDark;
+        // if (prefersDark) {
+        //     document.documentElement.classList.add('dark');
+        // }
+
+
+    </script>
+
 </body>
 </html>

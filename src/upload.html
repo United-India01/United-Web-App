@@ -3,68 +3,475 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Post - Gemini United Insurance</title>
-    <link href="styles/upload.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Create Post</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Apply Inter font globally */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Define dark theme colors consistent with others */
+            --background-dark: #1a1a2e;
+            --card-bg: #2a2a4e; /* Used for inputs/buttons */
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0e0;
+            --text-placeholder: #7070a0; /* Darker placeholder */
+            --text-link: #6a6aff;
+            --border-color: #4a4a8e;
+            --icon-color: #a0a0e0;
+            --tag-bg: #4a4a8e;
+            --tag-text: #e0e0ff;
+            --button-active-bg: #6a6aff; /* Active suggestion/problem button */
+            --button-active-text: #ffffff;
+        }
+        /* Dark theme setup */
+        html, body {
+            background-color: var(--background-dark);
+            color: var(--text-primary);
+            height: 100vh; /* Full height */
+            display: flex;
+            flex-direction: column; /* Stack header, main, footer */
+        }
+        /* Top Bar */
+        .top-bar {
+            background-color: var(--background-dark); /* Match body */
+            padding: 0.75rem 1rem; /* py-3 px-4 */
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Space out icons */
+            border-bottom: 1px solid var(--border-color);
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+        .top-bar .icon-button {
+            color: var(--icon-color);
+            font-size: 1.5rem; /* text-2xl */
+            background: none;
+            border: none;
+            padding: 0.25rem;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+         .top-bar .icon-button:hover {
+             color: var(--text-primary);
+         }
+         .top-bar .icon-button.send-disabled { /* Style for disabled send button */
+            color: var(--border-color);
+            cursor: not-allowed;
+         }
+
+        /* Main Content Area */
+        .main-content {
+            flex-grow: 1; /* Take remaining vertical space */
+            padding: 1rem; /* p-4 */
+            overflow-y: auto; /* Allow scrolling if content overflows */
+        }
+
+        /* Input Fields Styling */
+        .input-field, .textarea-field {
+            background: none; /* Transparent background */
+            border: none;
+            color: var(--text-primary);
+            width: 100%;
+            padding: 0.5rem 0; /* py-2 px-0 */
+            font-size: 1rem; /* text-base */
+            border-bottom: 1px solid var(--border-color);
+            transition: border-color 0.3s ease;
+        }
+        .input-field::placeholder, .textarea-field::placeholder {
+            color: var(--text-placeholder);
+        }
+        .input-field:focus, .textarea-field:focus {
+            outline: none;
+            border-bottom-color: var(--text-link);
+        }
+        .input-title {
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 600; /* font-semibold */
+        }
+        .textarea-field {
+            min-height: 100px; /* Minimum height for description */
+            resize: vertical; /* Allow vertical resize */
+        }
+
+        /* Section Headers */
+        .section-header {
+            color: var(--text-secondary);
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 500;
+            margin-top: 1.5rem; /* mt-6 */
+            margin-bottom: 0.75rem; /* mb-3 */
+        }
+
+        /* Suggestion/Problem Buttons */
+        .category-buttons {
+            display: flex;
+            gap: 0.75rem; /* gap-3 */
+        }
+        .category-button {
+            flex: 1; /* Take equal width */
+            background-color: var(--card-bg);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            padding: 0.625rem 1rem; /* py-2.5 px-4 */
+            border-radius: 0.5rem; /* rounded-lg */
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+        }
+        .category-button:hover {
+            border-color: var(--text-link);
+            color: var(--text-primary);
+        }
+        .category-button.active {
+            background-color: var(--button-active-bg);
+            color: var(--button-active-text);
+            border-color: var(--button-active-bg);
+        }
+
+        /* Tags Section */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem; /* gap-2 */
+            align-items: center;
+        }
+        .tag-item {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--tag-bg);
+            color: var(--tag-text);
+            padding: 0.25rem 0.75rem; /* py-1 px-3 */
+            border-radius: 9999px; /* rounded-full */
+            font-size: 0.8rem; /* text-xs */
+            font-weight: 500;
+        }
+        .tag-item i {
+            margin-right: 0.375rem; /* mr-1.5 */
+            font-size: 0.7rem;
+        }
+        .remove-tag-btn {
+            margin-left: 0.375rem; /* ml-1.5 */
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+            font-size: 0.8rem;
+        }
+        .remove-tag-btn:hover {
+            color: var(--text-primary);
+        }
+        .add-tag-button {
+            display: inline-flex;
+            align-items: center;
+            background: none;
+            border: 1px dashed var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.75rem; /* py-1 px-3 */
+            border-radius: 9999px; /* rounded-full */
+            font-size: 0.8rem; /* text-xs */
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .add-tag-button:hover {
+            color: var(--text-primary);
+            border-color: var(--text-link);
+        }
+        .add-tag-button i {
+            margin-right: 0.25rem; /* mr-1 */
+        }
+
+        /* Location Input */
+        .location-input-wrapper {
+            display: flex;
+            align-items: center;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem; /* rounded-lg */
+            padding: 0.5rem 1rem; /* py-2 px-4 */
+        }
+        .location-input-wrapper i {
+            color: var(--icon-color);
+            margin-right: 0.75rem; /* mr-3 */
+        }
+        .location-input {
+            flex-grow: 1;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+        .location-input::placeholder {
+            color: var(--text-placeholder);
+        }
+        .location-input:focus {
+            outline: none;
+        }
+
+        /* Bottom Action Bar */
+        .bottom-actions {
+            background-color: var(--background-dark); /* Match body */
+            padding: 0.75rem 1rem; /* py-3 px-4 */
+            border-top: 1px solid var(--border-color);
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+        .bottom-actions .icon-button {
+            color: var(--icon-color);
+            font-size: 1.25rem; /* text-xl */
+            background: none;
+            border: none;
+            padding: 0.25rem;
+            cursor: pointer;
+            margin-right: 1rem; /* mr-4 */
+            transition: color 0.2s ease;
+        }
+         .bottom-actions .icon-button:hover {
+             color: var(--text-primary);
+         }
+         /* Hide actual file input */
+        #attachFile, #attachImage {
+            display: none;
+        }
+
+    </style>
 </head>
 <body>
-    <header class="header">
-        <div class="flex justify-between items-center max-w-4xl mx-auto p-4">
-            <h1 class="text-xl font-semibold">Create New Post</h1>
-        </div>
+
+    <header class="top-bar">
+        <button id="closeButton" class="icon-button" title="Close">
+            <i class="fas fa-times"></i>
+        </button>
+        <button id="sendButton" class="icon-button send-disabled" title="Send Post" disabled> <i class="fas fa-paper-plane"></i>
+        </button>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4">
-        <form class="upload-form">
-            <div class="form-group">
-                <label for="title" class="form-label">Title</label>
-                <input type="text" id="title" class="form-input" placeholder="Enter post title" required>
+    <main class="main-content">
+        <form id="createPostForm">
+            <input type="text" id="postTitle" name="postTitle" placeholder="TITLE" class="input-field input-title" required>
+
+            <textarea id="postDescription" name="postDescription" placeholder="Description" class="textarea-field" required></textarea>
+
+            <div class="section-header">Category</div>
+            <div class="category-buttons">
+                <button type="button" class="category-button" data-category="suggestion">Suggestions</button>
+                <button type="button" class="category-button" data-category="problem">Problems</button>
+                <input type="hidden" id="postCategory" name="postCategory"> </div>
+
+            <div class="section-header">Tags</div>
+            <div class="tags-container" id="tagsContainer">
+                <span class="tag-item" data-tag="Transport">
+                    <i class="fas fa-car"></i>Transport
+                    <button type="button" class="remove-tag-btn" title="Remove tag">&times;</button>
+                </span>
+                <button type="button" class="add-tag-button" id="addTagButton">
+                    <i class="fas fa-plus"></i>Add tags
+                </button>
+                <input type="hidden" id="postTags" name="postTags" value="Transport">
             </div>
 
-            <div class="form-group">
-                <label for="content" class="form-label">Content</label>
-                <textarea id="content" class="form-input form-textarea" placeholder="What's on your mind?" required></textarea>
+            <div class="section-header">Location</div>
+            <div class="location-input-wrapper">
+                <i class="fas fa-map-marker-alt"></i>
+                <input type="text" id="postLocation" name="postLocation" placeholder="Location" class="location-input">
             </div>
 
-            <div class="form-group">
-                <label class="form-label">Tags</label>
-                <div class="tags-input-container">
-                    <input type="text" class="tags-input" placeholder="Add tags (press Enter)">
-                </div>
-                <small class="text-gray-400">Press Enter or comma to add tags</small>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Image</label>
-                <div class="file-upload">
-                    <input type="file" class="file-input" accept="image/*">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <div class="file-upload-text">Drag and drop an image or click to upload</div>
-                    <div class="text-sm text-gray-400">Max file size: 5MB</div>
-                </div>
-                <div class="image-preview">
-                    <img class="preview-image" src="" alt="Preview">
-                    <button type="button" class="remove-preview">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="flex justify-end gap-4">
-                <a href="home.html" class="btn-guest">Cancel</a>
-                <button type="submit" class="btn-login">Post</button>
-            </div>
         </form>
     </main>
 
-    <nav class="fixed bottom-0 left-0 right-0 bg-gray-900 p-4 flex justify-center space-x-8">
-        <a href="home.html" class="text-gray-400 hover:text-white"><i class="fas fa-home"></i></a>
-        <a href="notifications.html" class="text-gray-400 hover:text-white"><i class="fas fa-bell"></i></a>
-        <a href="profile.html" class="text-gray-400 hover:text-white"><i class="fas fa-user"></i></a>
-        <a href="dms.html" class="text-gray-400 hover:text-white"><i class="fas fa-envelope"></i></a>
-    </nav>
+    <footer class="bottom-actions">
+        <input type="file" id="attachFile" name="attachment">
+        <label for="attachFile" class="icon-button" title="Attach File">
+            <i class="fas fa-paperclip"></i>
+        </label>
 
-    <script src="scripts/upload.js"></script>
+        <input type="file" id="attachImage" name="image" accept="image/*">
+         <label for="attachImage" class="icon-button" title="Attach Image">
+            <i class="fas fa-image"></i>
+        </label>
+        </footer>
+
+    <script>
+        console.log("upload.html (create post) script loaded.");
+
+        // Get elements
+        const closeButton = document.getElementById('closeButton');
+        const sendButton = document.getElementById('sendButton');
+        const form = document.getElementById('createPostForm');
+        const titleInput = document.getElementById('postTitle');
+        const descriptionInput = document.getElementById('postDescription');
+        const categoryButtons = document.querySelectorAll('.category-button');
+        const hiddenCategoryInput = document.getElementById('postCategory');
+        const tagsContainer = document.getElementById('tagsContainer');
+        const addTagButton = document.getElementById('addTagButton');
+        const hiddenTagsInput = document.getElementById('postTags');
+        const attachFileButton = document.querySelector('label[for="attachFile"]');
+        const attachImageButton = document.querySelector('label[for="attachImage"]');
+        const fileInput = document.getElementById('attachFile');
+        const imageInput = document.getElementById('attachImage');
+
+
+        // --- Form Validation & Send Button State ---
+        function validateForm() {
+            const titleValid = titleInput.value.trim() !== '';
+            const descriptionValid = descriptionInput.value.trim() !== '';
+            const categoryValid = hiddenCategoryInput.value !== '';
+            // Add more checks if needed (e.g., location, tags)
+
+            const isFormValid = titleValid && descriptionValid && categoryValid;
+            sendButton.disabled = !isFormValid;
+            if (isFormValid) {
+                sendButton.classList.remove('send-disabled');
+            } else {
+                sendButton.classList.add('send-disabled');
+            }
+        }
+
+        // Add event listeners to inputs for validation
+        titleInput.addEventListener('input', validateForm);
+        descriptionInput.addEventListener('input', validateForm);
+
+
+        // --- Category Selection ---
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to the clicked button
+                button.classList.add('active');
+                // Update hidden input value
+                hiddenCategoryInput.value = button.getAttribute('data-category');
+                console.log('Category selected:', hiddenCategoryInput.value);
+                validateForm(); // Re-validate form after category selection
+            });
+        });
+
+        // --- Tag Management ---
+        function updateHiddenTagsInput() {
+            const currentTags = Array.from(tagsContainer.querySelectorAll('.tag-item'))
+                                   .map(tagEl => tagEl.getAttribute('data-tag'));
+            hiddenTagsInput.value = currentTags.join(','); // Store as comma-separated string
+            console.log('Hidden tags updated:', hiddenTagsInput.value);
+        }
+
+        // Add Tag Button
+        addTagButton.addEventListener('click', () => {
+            const newTagName = prompt("Enter tag name:");
+            if (newTagName && newTagName.trim() !== "") {
+                const tagName = newTagName.trim();
+                // Check if tag already exists
+                if (Array.from(tagsContainer.querySelectorAll('.tag-item')).some(el => el.getAttribute('data-tag').toLowerCase() === tagName.toLowerCase())) {
+                    alert("Tag already exists!");
+                    return;
+                }
+
+                const newTag = document.createElement('span');
+                newTag.className = 'tag-item';
+                newTag.setAttribute('data-tag', tagName);
+                // Basic icon - could be smarter based on tag name
+                newTag.innerHTML = `
+                    <i class="fas fa-tag"></i>${tagName}
+                    <button type="button" class="remove-tag-btn" title="Remove tag">&times;</button>
+                `;
+                // Insert before the "Add tags" button
+                tagsContainer.insertBefore(newTag, addTagButton);
+                updateHiddenTagsInput();
+            }
+        });
+
+        // Remove Tag Button (using event delegation)
+        tagsContainer.addEventListener('click', (event) => {
+            if (event.target.classList.contains('remove-tag-btn') || event.target.closest('.remove-tag-btn')) {
+                const tagToRemove = event.target.closest('.tag-item');
+                if (tagToRemove) {
+                    tagToRemove.remove();
+                    updateHiddenTagsInput();
+                }
+            }
+        });
+
+        // Initialize hidden tags input based on existing tags
+        updateHiddenTagsInput();
+
+
+        // --- Button Actions ---
+        closeButton.addEventListener('click', () => {
+            console.log('Close button clicked');
+            // Typically navigate back or clear the form
+            if (confirm("Discard this post?")) {
+                 window.location.href = 'home.html'; // Go back to home/feed
+            }
+        });
+
+        sendButton.addEventListener('click', () => {
+            if (sendButton.disabled) return; // Should not happen if validation is correct, but good practice
+
+            console.log('Send button clicked');
+            // Collect form data
+            const formData = new FormData(form);
+            // Append file/image if selected (more complex handling needed for actual upload)
+            if (fileInput.files.length > 0) {
+                 formData.append('attachment_file', fileInput.files[0]);
+            }
+             if (imageInput.files.length > 0) {
+                 formData.append('image_file', imageInput.files[0]);
+            }
+
+
+            console.log("Form Data to Send:");
+            for (let [key, value] of formData.entries()) {
+                // Don't log file objects directly in production
+                if (value instanceof File) {
+                     console.log(`${key}: ${value.name} (${value.type}, ${value.size} bytes)`);
+                } else {
+                     console.log(`${key}: ${value}`);
+                }
+            }
+
+            alert('Simulating post creation. Check console for data.');
+            // Here you would typically send formData via fetch to your backend API
+            // fetch('/api/posts', { method: 'POST', body: formData })
+            //  .then(...)
+            //  .catch(...)
+
+            // Optionally redirect after successful post
+            // window.location.href = 'home.html';
+        });
+
+        // --- File/Image Attachment Placeholders ---
+        attachFileButton.addEventListener('click', (e) => {
+            // The label itself triggers the input click
+            console.log('Attach file clicked');
+        });
+         attachImageButton.addEventListener('click', (e) => {
+            console.log('Attach image clicked');
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                console.log('File selected:', e.target.files[0].name);
+                alert(`File selected: ${e.target.files[0].name} (Simulation)`);
+                // Add visual indicator if needed
+            }
+        });
+         imageInput.addEventListener('change', (e) => {
+             if (e.target.files.length > 0) {
+                console.log('Image selected:', e.target.files[0].name);
+                 alert(`Image selected: ${e.target.files[0].name} (Simulation)`);
+                // Add visual indicator or preview if needed
+            }
+        });
+
+        // Initial validation check
+        validateForm();
+
+    </script>
+
 </body>
 </html>

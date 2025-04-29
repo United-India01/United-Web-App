@@ -3,152 +3,374 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gemini United Insurance - Organization Profile</title>
-    <link href="styles/org_profile.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Organization Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Apply Inter font globally */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Define dark theme colors consistent with others */
+            --background-dark: #1a1a2e;
+            --card-bg: #2a2a4e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0e0;
+            --text-link: #6a6aff;
+            --border-color: #4a4a8e;
+            --icon-color: #a0a0e0;
+            --follow-button-bg: #6a6aff; /* Blue follow button */
+            --follow-button-text: #ffffff;
+            --follow-button-hover-bg: #5a5aff;
+            --rating-color: #facc15; /* yellow-400 */
+            --tab-active-border: #6a6aff;
+            --tab-inactive-text: #a0a0e0;
+        }
+        /* Dark theme setup */
+        html, body {
+            background-color: var(--background-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        /* Top Bar (Same as home.html) */
+        .top-bar {
+            background-color: var(--card-bg);
+            padding: 0.75rem 1rem; /* py-3 px-4 */
+            display: flex;
+            align-items: center;
+            gap: 0.75rem; /* gap-3 */
+            position: sticky; top: 0; z-index: 20;
+            border-bottom: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+        .top-bar .icon-button {
+            color: var(--icon-color); font-size: 1.25rem; background: none;
+            border: none; padding: 0.25rem; cursor: pointer;
+        }
+        .top-bar .search-input {
+            flex-grow: 1; background: none; border: none; color: var(--text-secondary);
+            font-size: 1rem; padding: 0.25rem;
+        }
+        .top-bar .search-input:focus { outline: none; color: var(--text-primary); }
+
+        /* Main Content Area */
+        .main-content {
+            padding: 1rem; /* p-4 */
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        /* Organization Header */
+        .org-header {
+            display: flex;
+            flex-direction: column; /* Stack logo/stats and name/address */
+            align-items: center; /* Center items horizontally */
+            margin-bottom: 1.5rem; /* mb-6 */
+            position: relative; /* For bookmark positioning */
+        }
+        .org-header-top {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            gap: 1rem; /* gap-4 */
+            margin-bottom: 1rem; /* mb-4 */
+        }
+        .org-logo {
+            width: 72px; /* Larger logo */
+            height: 72px;
+            border-radius: 50%;
+            background-color: white; /* White background for logo */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 2px solid var(--border-color);
+        }
+        .org-logo img {
+            max-width: 80%; /* Adjust as needed */
+            max-height: 80%;
+            object-fit: contain;
+        }
+        .org-stats {
+            display: flex;
+            gap: 1.5rem; /* gap-6 */
+            align-items: center;
+            flex-grow: 1; /* Take available space */
+            justify-content: center; /* Center stats */
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem; /* gap-1 */
+        }
+        .stat-value .fa-star { color: var(--rating-color); }
+        .stat-label {
+            font-size: 0.75rem; /* text-xs */
+            color: var(--text-secondary);
+            margin-top: 0.125rem; /* mt-0.5 */
+        }
+        .bookmark-icon-org { /* Bookmark specific to org header */
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: var(--icon-color);
+            font-size: 1.25rem;
+            background: none; border: none; cursor: pointer; padding: 0.25rem;
+        }
+         .bookmark-icon-org:hover { color: var(--text-primary); }
+
+        .org-info {
+            text-align: center; /* Center name and address */
+            width: 100%;
+        }
+        .org-name {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600;
+            margin-bottom: 0.5rem; /* mb-2 */
+        }
+        .org-address {
+            font-size: 0.8rem; /* text-xs */
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center address line */
+            gap: 0.375rem; /* gap-1.5 */
+            margin-bottom: 1rem; /* mb-4 */
+            text-align: center; /* Ensure text within is centered */
+            max-width: 90%; /* Prevent overly long address */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .org-address i {
+            flex-shrink: 0; /* Prevent icon shrinking */
+        }
+
+        .follow-button {
+            background-color: var(--follow-button-bg);
+            color: var(--follow-button-text);
+            padding: 0.625rem 1.5rem; /* py-2.5 px-6 */
+            border: none;
+            border-radius: 9999px; /* rounded-full */
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-bottom: 1.5rem; /* mb-6 */
+        }
+        .follow-button:hover {
+            background-color: var(--follow-button-hover-bg);
+        }
+         .follow-button.following { /* Style for when following */
+             background-color: var(--card-bg);
+             color: var(--text-secondary);
+             border: 1px solid var(--border-color);
+         }
+
+        /* Tabs Section (Reusing styles from post_detail.html) */
+        .tabs-nav {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 1rem; /* mb-4 */
+        }
+        .tab-link {
+            flex: 1; /* Make tabs take equal width */
+            text-align: center;
+            padding: 0.75rem 1rem; /* py-3 px-4 */
+            cursor: pointer;
+            color: var(--tab-inactive-text);
+            font-weight: 500;
+            font-size: 0.9rem;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -1px;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .tab-link:hover { color: var(--text-primary); }
+        .tab-link.active {
+            color: var(--text-primary);
+            border-bottom-color: var(--tab-active-border);
+        }
+
+        /* Tab Content Area */
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .no-content-message {
+            text-align: center; color: var(--text-secondary);
+            padding: 2rem 0; font-size: 0.9rem;
+        }
+        /* Post Card Styling (Minimal for placeholder) */
+        .post-card-minimal {
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border: 1px solid var(--border-color);
+        }
+
+
+        /* Bottom Navigation (Reusing styles) */
+        .bottom-nav {
+             position: fixed; bottom: 0; left: 0; right: 0;
+             background-color: var(--card-bg); border-top: 1px solid var(--border-color);
+             display: flex; justify-content: space-around; padding: 0.5rem 0;
+             box-shadow: 0 -2px 5px rgba(0,0,0,0.1); z-index: 10; flex-shrink: 0;
+        }
+        .nav-item {
+             display: flex; flex-direction: column; align-items: center; text-decoration: none;
+             color: var(--icon-color); font-size: 0.75rem; padding: 0.25rem 0.5rem;
+             transition: color 0.2s ease; border: none; background: none; cursor: pointer;
+        }
+        .nav-item.active, .nav-item:hover { color: var(--text-primary); }
+        .nav-item i { font-size: 1.25rem; margin-bottom: 0.125rem; }
+    </style>
 </head>
 <body>
-    <header>
-        <img src="https://via.placeholder.com/1200x200" alt="Organization cover" class="org-cover">
-        <div class="org-header">
-            <img src="https://via.placeholder.com/120" alt="Organization logo" class="org-logo">
-            <h1 class="org-name">Gemini United Insurance</h1>
-            <p class="org-description">A leading insurance provider committed to protecting what matters most. Offering comprehensive coverage solutions for individuals and businesses.</p>
-            
-            <div class="quick-info">
-                <div class="info-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>New York, NY</span>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-globe"></i>
-                    <span>www.geminiunitedinsurance.com</span>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-phone"></i>
-                    <span>1-800-GEMINI-1</span>
-                </div>
-            </div>
 
-            <div class="org-stats">
-                <div class="stat-item">
-                    <div class="stat-number followers-count">25.6K</div>
-                    <div class="stat-label">Followers</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">150+</div>
-                    <div class="stat-label">Insurance Plans</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">98%</div>
-                    <div class="stat-label">Customer Satisfaction</div>
-                </div>
-            </div>
-
-            <div class="contact-buttons">
-                <button class="contact-button primary-button follow-button">
-                    <i class="fas fa-user-plus"></i>
-                    <span class="follow-text">Follow</span>
-                </button>
-                <a href="mailto:contact@geminiunitedinsurance.com" class="contact-button secondary-button contact-email">
-                    <i class="fas fa-envelope"></i>
-                    <span>Email</span>
-                </a>
-                <button class="contact-button secondary-button contact-chat">
-                    <i class="fas fa-comment"></i>
-                    <span>Chat</span>
-                </button>
-            </div>
-        </div>
+    <header class="top-bar">
+        <a href="home.html" class="icon-button" title="Back to Home">
+             <i class="fas fa-arrow-left"></i>
+         </a>
+        <input type="text" class="search-input" placeholder="Search">
+        <button class="icon-button" id="filterButton" title="Filter">
+            <i class="fas fa-filter"></i>
+        </button>
     </header>
 
-    <div class="org-tabs">
-        <div class="tab active" data-content="policies">Policies</div>
-        <div class="tab" data-content="about">About</div>
-        <div class="tab" data-content="team">Team</div>
-    </div>
-
-    <main class="max-w-4xl mx-auto px-4">
-        <div id="policies" class="content-section">
-            <h2 class="section-title">Insurance Policies</h2>
-            <div class="policy-grid">
-                <!-- Sample policy cards -->
-                <div class="policy-card" data-policy-id="1">
-                    <h3 class="policy-title">Health Insurance Premium</h3>
-                    <p class="policy-description">Comprehensive health coverage including preventive care, prescriptions, and mental health services.</p>
-                    <div class="policy-meta">
-                        <span>Starting at $199/mo</span>
-                        <i class="fas fa-chevron-right"></i>
+    <main class="main-content">
+        <section class="org-header">
+            <div class="org-header-top">
+                <div class="org-logo">
+                    <img src="https://placehold.co/60x60/ffffff/1a1a2e?text=LOGO" alt="Organization Logo">
+                </div>
+                <div class="org-stats">
+                    <div class="stat-item">
+                        <span class="stat-value"><i class="fas fa-star"></i>4.2</span>
+                        <span class="stat-label">Rating</span>
+                    </div>
+                    <div class="stat-item">
+                         <span class="stat-value"><i class="fas fa-upload"></i>0</span>
+                        <span class="stat-label">Posts</span>
                     </div>
                 </div>
-
-                <div class="policy-card" data-policy-id="2">
-                    <h3 class="policy-title">Life Insurance Plus</h3>
-                    <p class="policy-description">Secure your family's future with our comprehensive life insurance coverage.</p>
-                    <div class="policy-meta">
-                        <span>Starting at $79/mo</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </div>
-                </div>
-
-                <div class="policy-card" data-policy-id="3">
-                    <h3 class="policy-title">Auto Insurance Complete</h3>
-                    <p class="policy-description">Full coverage for your vehicle including liability, collision, and comprehensive protection.</p>
-                    <div class="policy-meta">
-                        <span>Custom Quote</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </div>
-                </div>
+                 <button class="bookmark-icon-org" title="Bookmark">
+                     <i class="far fa-bookmark"></i> </button>
             </div>
+
+            <div class="org-info">
+                <h1 class="org-name">National Institute of Open Schooling</h1>
+                 <p class="org-address">
+                     <i class="fas fa-map-marker-alt"></i>
+                     <span>A - 24 / 25 , Institutional Area , Sector - 62 , NOIDA , Gautam Budh Nagar , Uttar Pradesh</span>
+                 </p>
+                 <button id="followButton" class="follow-button">Follow</button>
+            </div>
+        </section>
+
+        <nav class="tabs-nav">
+            <button class="tab-link active" data-tab="posts">Posts</button>
+            <button class="tab-link" data-tab="reviews">Reviews</button>
+        </nav>
+
+        <div id="tabContentContainer">
+            <div id="posts" class="tab-content active">
+                <p class="no-content-message">No Posts yet.</p>
+                </div>
+            <div id="reviews" class="tab-content">
+                 <p class="no-content-message">No Reviews yet.</p>
+                 </div>
         </div>
 
-        <div id="about" class="content-section" style="display: none;">
-            <h2 class="section-title">About Us</h2>
-            <div class="content-text">
-                <p>Gemini United Insurance has been protecting individuals and businesses for over 50 years. Our commitment to excellent service and comprehensive coverage has made us one of the most trusted names in insurance.</p>
-                <p>We believe in:</p>
-                <ul>
-                    <li>Transparent and fair pricing</li>
-                    <li>24/7 customer support</li>
-                    <li>Quick and hassle-free claims process</li>
-                    <li>Customized insurance solutions</li>
-                </ul>
-            </div>
-        </div>
-
-        <div id="team" class="content-section" style="display: none;">
-            <h2 class="section-title">Our Leadership Team</h2>
-            <div class="team-grid">
-                <!-- Sample team members -->
-                <div class="team-member" data-user-id="1">
-                    <img src="https://via.placeholder.com/100" alt="Team member" class="member-avatar">
-                    <div class="member-name">Sarah Johnson</div>
-                    <div class="member-role">CEO</div>
-                </div>
-
-                <div class="team-member" data-user-id="2">
-                    <img src="https://via.placeholder.com/100" alt="Team member" class="member-avatar">
-                    <div class="member-name">Michael Chen</div>
-                    <div class="member-role">Head of Claims</div>
-                </div>
-
-                <div class="team-member" data-user-id="3">
-                    <img src="https://via.placeholder.com/100" alt="Team member" class="member-avatar">
-                    <div class="member-name">Emily Rodriguez</div>
-                    <div class="member-role">Customer Relations</div>
-                </div>
-            </div>
-        </div>
     </main>
 
-    <nav class="fixed bottom-0 left-0 right-0 bg-gray-900 p-4 flex justify-center space-x-8">
-        <a href="home.html" class="text-gray-400 hover:text-white"><i class="fas fa-home"></i></a>
-        <a href="notifications.html" class="text-gray-400 hover:text-white"><i class="fas fa-bell"></i></a>
-        <a href="profile.html" class="text-gray-400 hover:text-white"><i class="fas fa-user"></i></a>
-        <a href="dms.html" class="text-gray-400 hover:text-white"><i class="fas fa-envelope"></i></a>
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item"> <i class="fas fa-users"></i> </a>
+        <a href="#" class="nav-item"> <i class="fas fa-globe"></i> </a>
+        <a href="upload.html" class="nav-item"> <i class="fas fa-upload"></i> </a>
+        <a href="#" class="nav-item"> <i class="fas fa-bell"></i> </a>
+        <a href="profile.html" class="nav-item"> <i class="fas fa-user-circle"></i> </a>
     </nav>
 
-    <script src="scripts/org_profile.js"></script>
+    <script>
+        console.log("organization_profile.html script loaded.");
+
+        // --- Tab Switching Logic ---
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                const targetTab = link.getAttribute('data-tab');
+                // Update active link
+                tabLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                // Update active content
+                tabContents.forEach(content => {
+                    content.style.display = content.id === targetTab ? 'block' : 'none';
+                    if (content.id === targetTab) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
+            });
+        });
+         // Ensure initial state is correct
+         tabContents.forEach(content => {
+            if (!content.classList.contains('active')) {
+                content.style.display = 'none';
+            }
+         });
+
+
+        // --- Placeholder Action Listeners ---
+        const followButton = document.getElementById('followButton');
+        const bookmarkButton = document.querySelector('.bookmark-icon-org');
+        const filterButton = document.getElementById('filterButton'); // Top bar filter
+
+        followButton.addEventListener('click', () => {
+            // Toggle follow state and button appearance
+            if (followButton.classList.contains('following')) {
+                followButton.classList.remove('following');
+                followButton.textContent = 'Follow';
+                console.log('Unfollowed');
+                alert('Unfollowed Organization (Simulation)');
+            } else {
+                followButton.classList.add('following');
+                followButton.textContent = 'Following';
+                console.log('Followed');
+                 alert('Followed Organization (Simulation)');
+            }
+        });
+
+         bookmarkButton.addEventListener('click', () => {
+             console.log('Org Bookmark clicked');
+             const icon = bookmarkButton.querySelector('i');
+             if (icon.classList.contains('far')) {
+                 icon.classList.replace('far', 'fas');
+                 alert('Organization Bookmarked (Simulation)');
+             } else {
+                 icon.classList.replace('fas', 'far');
+                 alert('Organization Unbookmarked (Simulation)');
+             }
+         });
+
+         filterButton.addEventListener('click', () => {
+            console.log('Filter button clicked');
+            alert('Placeholder: Show filter options for org posts/reviews.');
+        });
+
+    </script>
+
 </body>
 </html>

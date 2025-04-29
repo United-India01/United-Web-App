@@ -3,106 +3,365 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post - Gemini United Insurance</title>
-    <link href="styles/post_detail.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Post Detail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Apply Inter font globally */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Define dark theme colors consistent with others */
+            --background-dark: #1a1a2e;
+            --card-bg: #2a2a4e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0e0;
+            --text-link: #6a6aff;
+            --border-color: #4a4a8e;
+            --icon-color: #a0a0e0;
+            --tag-bg: #4a4a8e;
+            --tag-text: #e0e0ff;
+            --upvote-color: #4ade80; /* green-400 */
+            --downvote-color: #f87171; /* red-400 */
+            --status-green-bg: rgba(74, 222, 128, 0.2);
+            --status-green-text: #4ade80;
+            --tab-active-border: #6a6aff;
+            --tab-inactive-text: #a0a0e0;
+        }
+        /* Dark theme setup */
+        html, body {
+            background-color: var(--background-dark);
+            color: var(--text-primary);
+            min-height: 100vh; /* Ensure body takes full height */
+            display: flex;
+            flex-direction: column; /* Stack header, main, nav */
+        }
+        /* Top Bar (Same as home.html) */
+        .top-bar {
+            background-color: var(--card-bg);
+            padding: 0.75rem 1rem; /* py-3 px-4 */
+            display: flex;
+            align-items: center;
+            gap: 0.75rem; /* gap-3 */
+            position: sticky; /* Keep it at the top */
+            top: 0;
+            z-index: 20; /* Ensure above content */
+            border-bottom: 1px solid var(--border-color);
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+        .top-bar .icon-button {
+            color: var(--icon-color);
+            font-size: 1.25rem; /* text-xl */
+            background: none; border: none; padding: 0.25rem; cursor: pointer;
+        }
+        .top-bar .search-input {
+            flex-grow: 1; background: none; border: none;
+            color: var(--text-secondary); font-size: 1rem; padding: 0.25rem;
+        }
+        .top-bar .search-input:focus { outline: none; color: var(--text-primary); }
+
+        /* Main Content Area */
+        .main-content {
+            padding: 1rem; /* p-4 */
+            flex-grow: 1; /* Take available space */
+            overflow-y: auto; /* Allow scrolling if needed */
+        }
+
+        /* Post Details Styling (similar to card, but maybe no background) */
+        .post-detail-container {
+             /* Optional: background-color: var(--card-bg); border-radius: 0.5rem; padding: 1rem; */
+             margin-bottom: 1.5rem; /* mb-6 */
+        }
+        .post-header { /* Reusing styles from home.html */
+            display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.5rem; /* mb-2 */
+        }
+        .post-avatar {
+            width: 36px; height: 36px; border-radius: 50%; background-color: var(--text-link);
+            color: var(--text-primary); display: flex; align-items: center; justify-content: center;
+            font-weight: 600; font-size: 1rem; flex-shrink: 0;
+        }
+        .post-meta { flex-grow: 1; }
+        .post-author-line { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.125rem; }
+        .post-author { font-weight: 600; font-size: 0.875rem; color: var(--text-primary); }
+        .post-time { font-size: 0.75rem; color: var(--text-secondary); }
+        .post-status { font-size: 0.7rem; font-weight: 500; padding: 0.125rem 0.5rem; border-radius: 9999px; margin-left: auto; }
+        .status-green { background-color: var(--status-green-bg); color: var(--status-green-text); }
+        .post-location { font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.75rem; /* mb-3 */ }
+        .options-button { /* Reusing styles */
+            background: none; border: none; color: var(--icon-color); cursor: pointer;
+            padding: 0.25rem; font-size: 1rem; margin-left: auto;
+        }
+         .options-button:hover { color: var(--text-primary); }
+         .bookmark-icon { /* Specific icon for bookmark */
+             color: var(--icon-color); font-size: 1.25rem;
+         }
+
+        .post-content-detail { margin-bottom: 1rem; /* mb-4 */ }
+        .post-text { font-size: 0.95rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 0.75rem; }
+        .post-text .mention { color: var(--text-link); font-weight: 500; }
+        .post-text .read-more { color: var(--text-link); font-size: 0.85rem; cursor: pointer; margin-left: 0.25rem; }
+        .post-tags .tag { /* Reusing styles */
+            display: inline-flex; align-items: center; background-color: var(--tag-bg);
+            color: var(--tag-text); padding: 0.25rem 0.75rem; border-radius: 9999px;
+            font-size: 0.75rem; font-weight: 500; margin-bottom: 1rem; /* mb-4 */
+        }
+        .post-tags .tag i { margin-right: 0.375rem; font-size: 0.7rem; }
+        .post-image img {
+            width: 100%; height: auto; max-height: 300px; object-fit: cover;
+            display: block; border-radius: 0.5rem; /* rounded-lg */ margin-bottom: 1rem; /* mb-4 */
+        }
+
+        /* Action Buttons Section */
+        .post-actions-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem; /* gap-3 */
+            padding-bottom: 1rem; /* pb-4 */
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 1rem; /* mb-4 */
+        }
+        .action-button { /* Reusing styles */
+            display: inline-flex; align-items: center; background-color: rgba(74, 74, 142, 0.5);
+            color: var(--text-secondary); padding: 0.375rem 0.75rem; border-radius: 9999px;
+            font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: background-color 0.2s, color 0.2s;
+            border: none;
+        }
+        .action-button:hover { background-color: var(--border-color); color: var(--text-primary); }
+        .action-button i { margin-right: 0.375rem; font-size: 0.9rem; }
+        .action-button .upvote-icon { color: var(--upvote-color); }
+        .action-button .downvote-icon { color: var(--downvote-color); }
+        .share-button { /* Specific style if needed, or use action-button */
+            margin-left: auto; /* Push share button to the right */
+        }
+
+        /* Tabs Section */
+        .tabs-nav {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 1rem; /* mb-4 */
+        }
+        .tab-link {
+            padding: 0.75rem 1rem; /* py-3 px-4 */
+            cursor: pointer;
+            color: var(--tab-inactive-text);
+            font-weight: 500;
+            font-size: 0.9rem;
+            border-bottom: 3px solid transparent; /* Placeholder for active border */
+            margin-bottom: -1px; /* Overlap border */
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .tab-link:hover {
+            color: var(--text-primary);
+        }
+        .tab-link.active {
+            color: var(--text-primary);
+            border-bottom-color: var(--tab-active-border);
+        }
+
+        /* Tab Content Area */
+        .tab-content {
+            display: none; /* Hide content by default */
+        }
+        .tab-content.active {
+            display: block; /* Show active content */
+        }
+        .no-content-message {
+            text-align: center;
+            color: var(--text-secondary);
+            padding: 2rem 0; /* py-8 */
+            font-size: 0.9rem;
+        }
+
+        /* Bottom Navigation (copied from profile/home) */
+        .bottom-nav {
+             position: fixed; bottom: 0; left: 0; right: 0;
+             background-color: var(--card-bg); border-top: 1px solid var(--border-color);
+             display: flex; justify-content: space-around; padding: 0.5rem 0;
+             box-shadow: 0 -2px 5px rgba(0,0,0,0.1); z-index: 10; flex-shrink: 0;
+        }
+        .nav-item {
+             display: flex; flex-direction: column; align-items: center; text-decoration: none;
+             color: var(--icon-color); font-size: 0.75rem; padding: 0.25rem 0.5rem;
+             transition: color 0.2s ease; border: none; background: none; cursor: pointer;
+        }
+        .nav-item.active, .nav-item:hover { color: var(--text-primary); }
+        .nav-item i { font-size: 1.25rem; margin-bottom: 0.125rem; }
+    </style>
 </head>
 <body>
-    <header class="header">
-        <div class="flex justify-between items-center max-w-4xl mx-auto p-4">
-            <a href="home.html" class="text-gray-400 hover:text-white">
-                <i class="fas fa-arrow-left"></i> Back to Home
-            </a>
-        </div>
+
+    <header class="top-bar">
+         <a href="home.html" class="icon-button" title="Back to Home">
+             <i class="fas fa-arrow-left"></i>
+         </a>
+        <input type="text" class="search-input" placeholder="Search">
+        <button class="icon-button" id="filterButton" title="Filter">
+            <i class="fas fa-filter"></i>
+        </button>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4">
-        <article class="post-container">
+    <main class="main-content">
+        <div class="post-detail-container">
             <div class="post-header">
-                <img src="https://via.placeholder.com/56" alt="Author avatar" class="post-author-avatar">
+                <div class="post-avatar">A</div>
                 <div class="post-meta">
-                    <div class="post-author-name">Jane Smith</div>
-                    <div class="post-time">2 hours ago</div>
+                    <div class="post-author-line">
+                        <span class="post-author">Anonymous#1235</span>
+                        <span class="post-time">7 day ago</span>
+                        <span class="post-status status-green">Under construction</span>
+                    </div>
+                    <div class="post-location">Mumbai, Maharastra</div>
+                </div>
+                 <button class="options-button bookmark-icon" title="Bookmark">
+                     <i class="far fa-bookmark"></i> </button>
+            </div>
+
+            <div class="post-content-detail">
+                 <div class="post-tags">
+                    <span class="tag"><i class="fas fa-road"></i>Road Transport</span>
+                 </div>
+                 <p class="post-text">
+                    <span class="mention">@Maharastra State Road Development Corporation</span> Who will align this portion?
+                    <br><br> Now that Gokhale bridge is almost completed... <a href="#" class="read-more">[read more]</a>
+                </p>
+                <div class="post-image">
+                    <img src="https://placehold.co/600x300/2a2a4e/a0a0e0?text=Road+Issue+Detail" alt="Under construction road segment detail"
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x300/2a2a4e/a0a0e0?text=Image+Not+Found';">
                 </div>
             </div>
 
-            <h1 class="post-title">New Health Insurance Policy Updates</h1>
-
-            <div class="post-content">
-                <p>We're excited to announce updates to our health insurance policies that will benefit all our customers. These changes include improved coverage for preventive care and mental health services.</p>
-                <img src="https://via.placeholder.com/800x400" alt="Policy update image" class="post-image">
-                <p>The new policies will take effect from next month. Stay tuned for more details or contact your insurance agent for specific information about your policy.</p>
+            <div class="post-actions-detail">
+                <button class="action-button upvote-btn"><i class="fas fa-arrow-up upvote-icon"></i><span class="count">567</span></button>
+                <button class="action-button downvote-btn"><i class="fas fa-arrow-down downvote-icon"></i><span class="count">2</span></button>
+                <button class="action-button share-button share-btn"><i class="fas fa-share-alt"></i> Share</button>
             </div>
 
-            <div class="post-tags">
-                <span class="post-tag">#HealthInsurance</span>
-                <span class="post-tag">#PolicyUpdate</span>
-                <span class="post-tag">#Healthcare</span>
-            </div>
+            <nav class="tabs-nav">
+                <button class="tab-link active" data-tab="replies">Replies</button>
+                <button class="tab-link" data-tab="suggestions">Suggestions</button>
+                <button class="tab-link" data-tab="problems">Problems</button>
+            </nav>
 
-            <div class="post-actions">
-                <button class="action-button like-button">
-                    <i class="far fa-heart"></i>
-                    <span class="action-count">42</span>
-                </button>
-                <button class="action-button">
-                    <i class="far fa-comment"></i>
-                    <span class="comments-count action-count">12</span>
-                </button>
-                <button class="action-button share-button">
-                    <i class="far fa-share-square"></i>
-                    <span class="action-count">8</span>
-                </button>
-            </div>
-
-            <section class="comments-section">
-                <h2 class="comments-header">Comments</h2>
-                
-                <form class="comment-form">
-                    <textarea class="comment-input" placeholder="Write a comment..." required></textarea>
-                    <button type="submit" class="btn-login">Post Comment</button>
-                </form>
-
-                <div class="comments-list">
-                    <!-- Sample comments -->
-                    <div class="comment-item">
-                        <img src="https://via.placeholder.com/40" alt="User avatar" class="comment-avatar">
-                        <div class="comment-content">
-                            <div class="comment-author">John Doe</div>
-                            <div class="comment-text">This is great news! Looking forward to the improved coverage.</div>
-                            <div class="comment-time">1 hour ago</div>
-                            <div class="comment-actions">
-                                <span class="comment-action">Like</span>
-                                <span class="comment-action">Reply</span>
-                            </div>
-                        </div>
+            <div id="tabContentContainer">
+                <div id="replies" class="tab-content active">
+                    <p class="no-content-message">No Replies yet.</p>
                     </div>
+                <div id="suggestions" class="tab-content">
+                     <p class="no-content-message">No Suggestions yet.</p>
+                     </div>
+                <div id="problems" class="tab-content">
+                     <p class="no-content-message">No related Problems found.</p>
+                     </div>
+            </div>
 
-                    <div class="comment-item">
-                        <img src="https://via.placeholder.com/40" alt="User avatar" class="comment-avatar">
-                        <div class="comment-content">
-                            <div class="comment-author">Sarah Wilson</div>
-                            <div class="comment-text">Will these changes affect existing policies?</div>
-                            <div class="comment-time">2 hours ago</div>
-                            <div class="comment-actions">
-                                <span class="comment-action">Like</span>
-                                <span class="comment-action">Reply</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </article>
-    </main>
+        </div> </main>
 
-    <nav class="fixed bottom-0 left-0 right-0 bg-gray-900 p-4 flex justify-center space-x-8">
-        <a href="home.html" class="text-gray-400 hover:text-white"><i class="fas fa-home"></i></a>
-        <a href="notifications.html" class="text-gray-400 hover:text-white"><i class="fas fa-bell"></i></a>
-        <a href="profile.html" class="text-gray-400 hover:text-white"><i class="fas fa-user"></i></a>
-        <a href="dms.html" class="text-gray-400 hover:text-white"><i class="fas fa-envelope"></i></a>
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item"> <i class="fas fa-users"></i>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-globe"></i>
+        </a>
+        <a href="upload.html" class="nav-item">
+            <i class="fas fa-upload"></i>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-bell"></i>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="fas fa-user-circle"></i>
+        </a>
     </nav>
 
-    <script src="scripts/post_detail.js"></script>
+    <script>
+        console.log("post_detail.html script loaded.");
+
+        // --- Tab Switching Logic ---
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                const targetTab = link.getAttribute('data-tab');
+
+                // Update active link
+                tabLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+
+                // Update active content
+                tabContents.forEach(content => {
+                    if (content.id === targetTab) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        // --- Placeholder Action Listeners ---
+        const postContainer = document.querySelector('.post-detail-container'); // Use a container for delegation
+
+        postContainer.addEventListener('click', (event) => {
+            const target = event.target;
+
+            // Action buttons (Upvote, Downvote, Share)
+            const actionButton = target.closest('.action-button');
+            if (actionButton) {
+                 if (actionButton.classList.contains('upvote-btn')) {
+                    console.log('Upvote clicked');
+                    const countSpan = actionButton.querySelector('.count');
+                    if (countSpan) countSpan.textContent = parseInt(countSpan.textContent) + 1;
+                    alert('Upvoted (Simulation)');
+                } else if (actionButton.classList.contains('downvote-btn')) {
+                    console.log('Downvote clicked');
+                    const countSpan = actionButton.querySelector('.count');
+                    if (countSpan) countSpan.textContent = parseInt(countSpan.textContent) + 1;
+                    alert('Downvoted (Simulation)');
+                } else if (actionButton.classList.contains('share-btn')) {
+                    console.log('Share clicked');
+                    alert('Placeholder: Show sharing options.');
+                }
+            }
+
+            // Bookmark button
+            const bookmarkButton = target.closest('.bookmark-icon');
+            if (bookmarkButton) {
+                console.log('Bookmark clicked');
+                // Toggle icon (example)
+                const icon = bookmarkButton.querySelector('i');
+                if (icon.classList.contains('far')) { // If outline
+                    icon.classList.remove('far');
+                    icon.classList.add('fas'); // Make solid
+                    alert('Post Bookmarked (Simulation)');
+                } else { // If solid
+                    icon.classList.remove('fas');
+                    icon.classList.add('far'); // Make outline
+                     alert('Post Unbookmarked (Simulation)');
+                }
+            }
+
+            // Read more link
+            const readMoreLink = target.closest('.read-more');
+             if (readMoreLink) {
+                 event.preventDefault(); // Prevent default link behavior
+                 console.log('Read more clicked');
+                 alert('Placeholder: Expand post text or navigate.');
+                 // Add logic to expand text or load full content
+             }
+        });
+
+         // Top bar buttons (if needed)
+         const filterButton = document.getElementById('filterButton');
+         filterButton.addEventListener('click', () => {
+            console.log('Filter button clicked');
+            alert('Placeholder: Show filter options.');
+        });
+
+
+    </script>
+
 </body>
 </html>

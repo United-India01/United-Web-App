@@ -3,70 +3,320 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notifications - Gemini United Insurance</title>
-    <link href="styles/notifications.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Notifications</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Apply Inter font globally */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Define dark theme colors consistent with others */
+            --background-dark: #1a1a2e;
+            --card-bg: #2a2a4e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0e0;
+            --text-link: #6a6aff;
+            --border-color: #4a4a8e;
+            --icon-color: #a0a0e0;
+            --follow-button-bg: #6a6aff;
+            --follow-button-text: #ffffff;
+            --follow-button-hover-bg: #5a5aff;
+            --followed-button-bg: var(--card-bg);
+            --followed-button-text: var(--text-secondary);
+            --followed-button-border: var(--border-color);
+        }
+        /* Dark theme setup */
+        html, body {
+            background-color: var(--background-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        /* Top Header */
+        .app-header {
+            background-color: var(--card-bg); /* Use card background for header */
+            padding: 1rem 1.5rem; /* py-4 px-6 */
+            text-align: center;
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600; /* font-semibold */
+            border-bottom: 1px solid var(--border-color);
+            position: sticky; top: 0; z-index: 20;
+            flex-shrink: 0;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-bottom: 1rem; /* Add padding at the bottom */
+        }
+
+        /* Notification Group Styling */
+        .notification-group {
+            margin-top: 1rem; /* mt-4 */
+        }
+        .group-header {
+            font-size: 1rem; /* text-base */
+            font-weight: 600; /* font-semibold */
+            padding: 0.5rem 1rem; /* py-2 px-4 */
+            color: var(--text-primary);
+        }
+
+        /* Notification Item Styling */
+        .notification-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem; /* py-3 px-4 */
+            gap: 0.75rem; /* gap-3 */
+            transition: background-color 0.2s ease;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-color); /* Separator */
+        }
+         .notification-item:last-child {
+             border-bottom: none; /* Remove border for last item in group potentially */
+         }
+        .notification-item:hover {
+            background-color: rgba(255, 255, 255, 0.03); /* Subtle hover */
+        }
+        .notification-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--card-bg); /* Placeholder background */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1px solid var(--border-color);
+        }
+        .notification-avatar img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .notification-content {
+            flex-grow: 1;
+            font-size: 0.875rem; /* text-sm */
+            line-height: 1.4;
+        }
+        .notification-content strong {
+            font-weight: 600; /* font-semibold */
+            color: var(--text-primary);
+        }
+        .notification-time {
+            color: var(--text-secondary);
+            margin-left: 0.25rem; /* ml-1 */
+            font-size: 0.8rem; /* text-xs */
+        }
+        .notification-thumbnail {
+            width: 40px;
+            height: 40px;
+            border-radius: 0.25rem; /* rounded-sm */
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 1px solid var(--border-color);
+        }
+        .notification-action button {
+            font-size: 0.8rem; /* text-xs */
+            font-weight: 500;
+            padding: 0.375rem 0.75rem; /* py-1.5 px-3 */
+            border-radius: 0.375rem; /* rounded-md */
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+            margin-left: 0.5rem; /* ml-2 */
+            flex-shrink: 0;
+        }
+        .follow-btn {
+            background-color: var(--follow-button-bg);
+            color: var(--follow-button-text);
+            border: none;
+        }
+        .follow-btn:hover { background-color: var(--follow-button-hover-bg); }
+        .following-btn {
+             background-color: var(--followed-button-bg);
+             color: var(--followed-button-text);
+             border: 1px solid var(--followed-button-border);
+        }
+        .following-btn:hover { border-color: var(--text-secondary); }
+
+
+        /* Bottom Navigation (Reusing styles) */
+        .bottom-nav {
+             position: fixed; bottom: 0; left: 0; right: 0;
+             background-color: var(--card-bg); border-top: 1px solid var(--border-color);
+             display: flex; justify-content: space-around; padding: 0.5rem 0;
+             box-shadow: 0 -2px 5px rgba(0,0,0,0.1); z-index: 10; flex-shrink: 0;
+        }
+        .nav-item {
+             display: flex; flex-direction: column; align-items: center; text-decoration: none;
+             color: var(--icon-color); font-size: 0.75rem; padding: 0.25rem 0.5rem;
+             transition: color 0.2s ease; border: none; background: none; cursor: pointer;
+        }
+        .nav-item.active, .nav-item:hover { color: var(--text-primary); }
+        .nav-item i { font-size: 1.25rem; margin-bottom: 0.125rem; }
+    </style>
 </head>
 <body>
-    <header class="header">
-        <div class="flex justify-between items-center max-w-4xl mx-auto p-4">
-            <h1 class="text-xl font-semibold">Notifications</h1>
-            <button id="markAllRead" class="text-sm text-blue-500 hover:underline">
-                Mark all as read
-            </button>
-        </div>
+
+    <header class="app-header">
+        Notifications
     </header>
 
-    <div class="filter-buttons">
-        <button class="filter-button active" data-filter="all">All</button>
-        <button class="filter-button" data-filter="claim">Claims</button>
-        <button class="filter-button" data-filter="message">Messages</button>
-        <button class="filter-button" data-filter="system">System</button>
-    </div>
+    <main class="main-content" id="notificationList">
 
-    <main class="max-w-4xl mx-auto px-4">
-        <!-- Sample notifications -->
-        <div class="notification-item unread" data-id="1" data-type="claim">
-            <img src="https://via.placeholder.com/48" alt="User avatar" class="notification-avatar">
-            <div class="notification-content">
-                <p class="notification-text">
-                    <strong>Jane Smith</strong> submitted a new claim for review
-                </p>
-                <span class="notification-time">2 hours ago</span>
-                <a href="#" class="notification-action">View Claim</a>
-            </div>
-        </div>
+        <section class="notification-group">
+            <h2 class="group-header">Today</h2>
 
-        <div class="notification-item" data-id="2" data-type="message">
-            <img src="https://via.placeholder.com/48" alt="User avatar" class="notification-avatar">
-            <div class="notification-content">
-                <p class="notification-text">
-                    <strong>John Doe</strong> sent you a message
-                </p>
-                <span class="notification-time">5 hours ago</span>
-                <a href="dms.html" class="notification-action">View Message</a>
+            <div class="notification-item" data-type="follow" data-user-id="user456">
+                <div class="notification-avatar">
+                    <img src="https://placehold.co/40x40/2a2a4e/ffffff?text=U" alt="User Avatar">
+                </div>
+                <div class="notification-content">
+                    <strong>User#456</strong> started following you. <span class="notification-time">2h</span>
+                </div>
+                <div class="notification-action">
+                    <button class="follow-btn">Follow</button>
+                </div>
             </div>
-        </div>
 
-        <div class="notification-item unread" data-id="3" data-type="system">
-            <img src="https://via.placeholder.com/48" alt="System notification" class="notification-avatar">
-            <div class="notification-content">
-                <p class="notification-text">
-                    System maintenance scheduled for tonight at 11 PM
-                </p>
-                <span class="notification-time">1 day ago</span>
+            <div class="notification-item" data-type="like" data-post-id="post789">
+                <div class="notification-avatar">
+                     <img src="https://placehold.co/40x40/6a6aff/ffffff?text=A" alt="User Avatar">
+                </div>
+                <div class="notification-content">
+                    <strong>Anonymous#1555</strong> liked your post about infrastructure. <span class="notification-time">3h</span>
+                </div>
+                <img src="https://placehold.co/40x40/1a1a2e/a0a0e0?text=Post" alt="Post thumbnail" class="notification-thumbnail">
             </div>
-        </div>
+
+             <div class="notification-item" data-type="mention" data-post-id="post123">
+                <div class="notification-avatar">
+                     <img src="https://placehold.co/40x40/facc15/1a1a2e?text=O" alt="Organization Avatar">
+                </div>
+                <div class="notification-content">
+                    <strong>Org#Gov</strong> mentioned you in a post: "Regarding the road alignment..." <span class="notification-time">5h</span>
+                </div>
+                 <img src="https://placehold.co/40x40/1a1a2e/a0a0e0?text=Post" alt="Post thumbnail" class="notification-thumbnail">
+            </div>
+
+        </section>
+
+        <section class="notification-group">
+            <h2 class="group-header">This Week</h2>
+
+            <div class="notification-item" data-type="comment" data-post-id="post789">
+                <div class="notification-avatar">
+                     <img src="https://placehold.co/40x40/4ade80/1a1a2e?text=C" alt="User Avatar">
+                </div>
+                <div class="notification-content">
+                    <strong>Citizen#999</strong> commented: "I agree, this needs attention." on your post. <span class="notification-time">2d</span>
+                </div>
+                 <img src="https://placehold.co/40x40/1a1a2e/a0a0e0?text=Post" alt="Post thumbnail" class="notification-thumbnail">
+            </div>
+
+            <div class="notification-item" data-type="follow" data-user-id="user111">
+                <div class="notification-avatar">
+                    <img src="https://placehold.co/40x40/f87171/ffffff?text=X" alt="User Avatar">
+                </div>
+                <div class="notification-content">
+                    <strong>User#111</strong> started following you. <span class="notification-time">4d</span>
+                </div>
+                <div class="notification-action">
+                    <button class="following-btn">Following</button>
+                </div>
+            </div>
+
+             <div class="notification-item" data-type="like" data-post-id="post333">
+                <div class="notification-avatar">
+                     <span class="fa-stack fa-1x text-[var(--icon-color)]">
+                         <i class="fas fa-circle fa-stack-2x"></i>
+                         <i class="fas fa-heart fa-stack-1x fa-inverse text-xs"></i>
+                     </span>
+                </div>
+                <div class="notification-content">
+                    <strong>User#123</strong> and <strong>3 others</strong> liked your post about the illegal hoarding. <span class="notification-time">5d</span>
+                </div>
+                 <img src="https://placehold.co/40x40/1a1a2e/a0a0e0?text=Post" alt="Post thumbnail" class="notification-thumbnail">
+            </div>
+
+        </section>
+
+         <section class="notification-group">
+            <h2 class="group-header">Earlier</h2>
+             <div class="notification-item" data-type="system" data-info-id="update1">
+                <div class="notification-avatar bg-[var(--text-link)] flex items-center justify-center"> <i class="fas fa-info-circle text-xl"></i>
+                </div>
+                <div class="notification-content">
+                    Welcome to the platform! Check out the <a href="#" class="text-[var(--text-link)] hover:underline">Community Guidelines</a>. <span class="notification-time">2w</span>
+                </div>
+            </div>
+        </section>
+
+
     </main>
 
-    <nav class="fixed bottom-0 left-0 right-0 bg-gray-900 p-4 flex justify-center space-x-8">
-        <a href="home.html" class="text-gray-400 hover:text-white"><i class="fas fa-home"></i></a>
-        <a href="notifications.html" class="text-gray-400 hover:text-white"><i class="fas fa-bell"></i></a>
-        <a href="profile.html" class="text-gray-400 hover:text-white"><i class="fas fa-user"></i></a>
-        <a href="dms.html" class="text-gray-400 hover:text-white"><i class="fas fa-envelope"></i></a>
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item"> <i class="fas fa-users"></i> </a>
+        <a href="#" class="nav-item"> <i class="fas fa-globe"></i> </a>
+        <a href="upload.html" class="nav-item"> <i class="fas fa-upload"></i> </a>
+        <a href="notifications.html" class="nav-item active"> <i class="fas fa-bell"></i> </a> <a href="profile.html" class="nav-item"> <i class="fas fa-user-circle"></i> </a>
     </nav>
 
-    <script src="scripts/notifications.js"></script>
+    <script>
+        console.log("notifications.html script loaded.");
+
+        const notificationList = document.getElementById('notificationList');
+
+        notificationList.addEventListener('click', (event) => {
+            const target = event.target;
+
+            // Handle click on the whole item (navigate)
+            const notificationItem = target.closest('.notification-item');
+            if (notificationItem && !target.closest('button') && !target.closest('a')) { // Don't trigger if clicking button/link
+                const type = notificationItem.dataset.type;
+                const userId = notificationItem.dataset.userId;
+                const postId = notificationItem.dataset.postId;
+                console.log(`Notification clicked: type=${type}, user=${userId}, post=${postId}`);
+
+                // Placeholder navigation logic
+                if (type === 'follow' && userId) {
+                    alert(`Simulating navigation to profile: ${userId}`);
+                    // window.location.href = `profile.html?user=${userId}`; // Example
+                } else if (postId) {
+                     alert(`Simulating navigation to post: ${postId}`);
+                     // window.location.href = `post_detail.html?post=${postId}`; // Example
+                } else {
+                    alert('Clicked a notification.');
+                }
+            }
+
+            // Handle click on follow/following button
+            const followButton = target.closest('.follow-btn');
+            if (followButton) {
+                console.log('Follow button clicked');
+                followButton.textContent = 'Following';
+                followButton.classList.remove('follow-btn');
+                followButton.classList.add('following-btn');
+                alert('Followed back (Simulation)');
+                // Add API call logic here
+            }
+
+            const followingButton = target.closest('.following-btn');
+             if (followingButton) {
+                 console.log('Following button clicked (-> Unfollow)');
+                 followingButton.textContent = 'Follow';
+                 followingButton.classList.remove('following-btn');
+                 followingButton.classList.add('follow-btn');
+                 alert('Unfollowed (Simulation)');
+                 // Add API call logic here
+            }
+
+        });
+
+    </script>
+
 </body>
 </html>

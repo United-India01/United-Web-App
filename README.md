@@ -1,4 +1,4 @@
-# Gemini United Project
+# United India App Project
 
 A web application for United India that provides user authentication, profile management, notifications, and communication features.
 
@@ -22,11 +22,6 @@ gemini-united-project/
 - Direct Messages
 - Upload
 - Post Detail
-
-## Setup
-1. Clone the repository
-2. Open the project in a web browser
-3. Start with index.html
 
 ## Technologies Used
 - HTML5

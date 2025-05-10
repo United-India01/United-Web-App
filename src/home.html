@@ -21,20 +21,22 @@
             --text-link: #6a6aff;
             --border-color: #4a4a8e;
             --icon-color: #a0a0e0;
-            --tag-bg: #4a4a8e; /* Default tag background */
-            --tag-text: #e0e0ff; /* Default tag text */
+            --tag-bg: #4a4a8e;
+            --tag-text: #e0e0ff;
             --upvote-color: #4ade80; /* green-400 */
             --downvote-color: #f87171; /* red-400 */
-            --status-green-bg: rgba(74, 222, 128, 0.2); /* green-400 with opacity */
+            --status-green-bg: rgba(74, 222, 128, 0.2);
             --status-green-text: #4ade80;
-            --status-blue-bg: rgba(96, 165, 250, 0.2); /* blue-400 with opacity */
+            --status-blue-bg: rgba(96, 165, 250, 0.2);
             --status-blue-text: #60a5fa;
+            --side-menu-bg: #222240; /* Slightly different from card-bg for distinction */
         }
         /* Dark theme setup */
         html, body {
             background-color: var(--background-dark);
             color: var(--text-primary);
             padding-bottom: 70px; /* Space for bottom nav */
+            overflow-x: hidden; /* Prevent horizontal scroll when menu is out */
         }
         /* Top Bar */
         .top-bar {
@@ -45,7 +47,7 @@
             gap: 0.75rem; /* gap-3 */
             position: sticky; /* Keep it at the top */
             top: 0;
-            z-index: 10;
+            z-index: 30; /* Ensure top-bar is above side menu overlay */
             border-bottom: 1px solid var(--border-color);
         }
         .top-bar .icon-button {
@@ -68,7 +70,95 @@
             outline: none;
             color: var(--text-primary);
         }
-        /* Post Card Styling */
+
+        /* Side Menu (Drawer) Styling */
+        .side-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Dimming overlay */
+            z-index: 40; /* Above content, below menu */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .side-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -300px; /* Start off-screen */
+            width: 300px; /* Menu width */
+            max-width: 80%; /* Max width for smaller screens */
+            height: 100%;
+            background-color: var(--side-menu-bg);
+            z-index: 50; /* Highest z-index */
+            transition: left 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+        }
+        .side-menu.active {
+            left: 0; /* Slide in */
+        }
+        .side-menu-header {
+            padding: 1.25rem 1rem; /* py-5 px-4 */
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+        }
+        .side-menu-header .app-logo { /* Placeholder for app logo/name */
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600;
+            color: var(--text-primary);
+            /* Example: Add an icon or small image here */
+        }
+        .side-menu-header .app-logo i {
+            margin-right: 0.5rem;
+            color: var(--text-link);
+        }
+        .side-menu-content {
+            padding: 1rem 0; /* py-4 px-0 */
+            overflow-y: auto; /* Scrollable content */
+            flex-grow: 1;
+        }
+        .side-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 0.875rem 1.5rem; /* py-3.5 px-6 */
+            color: var(--text-secondary);
+            font-size: 0.95rem; /* Slightly larger than text-sm */
+            text-decoration: none;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .side-menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+        .side-menu-item i {
+            width: 24px; /* Fixed width for icon alignment */
+            text-align: center;
+            margin-right: 1rem; /* mr-4 */
+            font-size: 1.125rem; /* text-lg */
+            color: var(--icon-color); /* Default icon color */
+        }
+        .side-menu-item:hover i {
+            color: var(--text-link); /* Icon color on hover */
+        }
+        .side-menu-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+
+        /* Post Card Styling (Copied from previous version) */
         .post-card {
             background-color: var(--card-bg);
             border-radius: 0.5rem; /* rounded-lg */
@@ -237,6 +327,39 @@
 </head>
 <body>
 
+    <div class="side-menu-overlay" id="sideMenuOverlay"></div>
+
+    <aside class="side-menu" id="sideMenu">
+        <div class="side-menu-header">
+            <span class="app-logo"><i class="fas fa-shield-alt"></i> AppName</span>
+            </div>
+        <nav class="side-menu-content">
+            <a href="#" class="side-menu-item">
+                <i class="fas fa-concierge-bell"></i>
+                <span>Services</span>
+            </a>
+            <a href="#" class="side-menu-item">
+                <i class="fas fa-phone-alt"></i>
+                <span>Contact Us</span>
+            </a>
+            <a href="#" class="side-menu-item">
+                <i class="fas fa-headset"></i>
+                <span>Helplines</span>
+            </a>
+            <a href="#" class="side-menu-item">
+                <i class="fas fa-file-alt"></i>
+                <span>Grievance Portal</span>
+            </a>
+            <a href="#" class="side-menu-item">
+                <i class="fas fa-flag"></i>
+                <span>Report</span>
+            </a>
+            </nav>
+        <div class="side-menu-footer">
+            AppName &copy; 2025
+        </div>
+    </aside>
+
     <header class="top-bar">
         <button class="icon-button" id="menuButton" title="Menu">
             <i class="fas fa-bars"></i>
@@ -288,7 +411,7 @@
                     <div class="post-author-line">
                         <span class="post-author">Anonymous#1555</span>
                         <span class="post-time">5 day ago</span>
-                        </div>
+                    </div>
                     <div class="post-location">Mumbai, Maharastra</div>
                 </div>
                  <button class="options-button" title="Options"><i class="fas fa-ellipsis-h"></i></button>
@@ -297,7 +420,7 @@
                 <p class="post-text">
                     Improve the infrastructure of city step by step to support skyscrapers to fix the Housing problem.
                 </p>
-                 </div>
+            </div>
             <footer class="post-footer">
                 <div class="post-tags">
                     <span class="tag"><i class="fas fa-home"></i>Living & wellbeing</span>
@@ -312,7 +435,8 @@
 
         <article class="post-card">
             <div class="post-header">
-                <div class="post-avatar">I</div> <div class="post-meta">
+                <div class="post-avatar">I</div>
+                <div class="post-meta">
                     <div class="post-author-line">
                         <span class="post-author">Anonymous#3332</span>
                         <span class="post-time">12 day ago</span>
@@ -342,8 +466,7 @@
                 </div>
             </footer>
         </article>
-
-        </main>
+    </main>
 
     <nav class="bottom-nav">
         <a href="dms.html" class="nav-item"> <i class="fas fa-users"></i>
@@ -363,53 +486,70 @@
     </nav>
 
     <script>
-        console.log("home.html (feed theme) script loaded.");
+        console.log("home.html (feed theme with side menu) script loaded.");
 
-        // --- Placeholder Event Listeners ---
-        const feedContainer = document.getElementById('feedContainer');
+        // --- Side Menu Toggle ---
         const menuButton = document.getElementById('menuButton');
-        const filterButton = document.getElementById('filterButton');
+        const sideMenu = document.getElementById('sideMenu');
+        const sideMenuOverlay = document.getElementById('sideMenuOverlay');
 
-        menuButton.addEventListener('click', () => {
-            console.log('Menu button clicked');
-            // alert('Placeholder: Show side menu.');
-        });
+        function toggleSideMenu() {
+            sideMenu.classList.toggle('active');
+            sideMenuOverlay.classList.toggle('active');
+            // Optional: Prevent body scroll when menu is open
+            // document.body.style.overflow = sideMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        menuButton.addEventListener('click', toggleSideMenu);
+        sideMenuOverlay.addEventListener('click', toggleSideMenu); // Close menu when overlay is clicked
+
+        // --- Placeholder Event Listeners (Feed related - from previous version) ---
+        const feedContainer = document.getElementById('feedContainer');
+        const filterButton = document.getElementById('filterButton'); // Top bar filter
 
         filterButton.addEventListener('click', () => {
             console.log('Filter button clicked');
             // alert('Placeholder: Show filter options.');
         });
 
-        // Add listeners to dynamically added elements (like buttons in posts)
         feedContainer.addEventListener('click', (event) => {
             const target = event.target;
-
-            // Check if an action button or its child was clicked
             const actionButton = target.closest('.action-button');
             if (actionButton) {
                 if (actionButton.classList.contains('upvote-btn')) {
                     console.log('Upvote clicked');
-                    // Add logic to update count and potentially send API request
                     const countSpan = actionButton.querySelector('.count');
-                    if (countSpan) countSpan.textContent = parseInt(countSpan.textContent) + 1; // Simulate update
+                    if (countSpan) countSpan.textContent = parseInt(countSpan.textContent) + 1;
                     // alert('Upvoted (Simulation)');
                 } else if (actionButton.classList.contains('downvote-btn')) {
                     console.log('Downvote clicked');
                     const countSpan = actionButton.querySelector('.count');
-                     if (countSpan) countSpan.textContent = parseInt(countSpan.textContent) + 1; // Simulate update
+                     if (countSpan) countSpan.textContent = parseInt(countSpan.textContent) + 1;
                     // alert('Downvoted (Simulation)');
                 } else if (actionButton.classList.contains('share-btn')) {
                     console.log('Share clicked');
                     // alert('Placeholder: Show sharing options.');
                 }
             }
-
-             // Check if options button was clicked
              const optionsButton = target.closest('.options-button');
              if (optionsButton) {
                  console.log('Options clicked');
                  // alert('Placeholder: Show post options menu.');
              }
+        });
+
+        // --- Side Menu Item Click (Placeholder) ---
+        const sideMenuItems = document.querySelectorAll('.side-menu-item');
+        sideMenuItems.forEach(item => {
+            item.addEventListener('click', (event) => {
+                event.preventDefault(); // Prevent default link behavior for now
+                const itemName = item.querySelector('span').textContent;
+                console.log(`Side menu item clicked: ${itemName}`);
+                // alert(`Navigating to ${itemName} (Placeholder)`);
+                toggleSideMenu(); // Close menu after clicking an item
+                // Add actual navigation logic here:
+                // window.location.href = item.getAttribute('href');
+            });
         });
 
     </script>

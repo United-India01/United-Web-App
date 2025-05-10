@@ -77,7 +77,7 @@
             border-bottom: 1px solid var(--border-color); /* Separator */
         }
          .notification-item:last-child {
-             border-bottom: none; /* Remove border for last item in group potentially */
+             border-bottom: none; 
          }
         .notification-item:hover {
             background-color: rgba(255, 255, 255, 0.03); /* Subtle hover */
@@ -86,13 +86,14 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background-color: var(--card-bg); /* Placeholder background */
+            background-color: var(--card-bg); 
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             flex-shrink: 0;
             border: 1px solid var(--border-color);
+            font-weight: 600; /* For text avatars */
         }
         .notification-avatar img {
             width: 100%; height: 100%; object-fit: cover;
@@ -103,45 +104,37 @@
             line-height: 1.4;
         }
         .notification-content strong {
-            font-weight: 600; /* font-semibold */
+            font-weight: 600; 
             color: var(--text-primary);
+        }
+        .notification-content .post-title { /* Style for the quoted post title */
+            color: var(--text-secondary);
+            display: block; /* Make it appear on a new line */
+            margin-top: 0.125rem; /* Add a little space */
+            font-style: italic;
         }
         .notification-time {
             color: var(--text-secondary);
             margin-left: 0.25rem; /* ml-1 */
             font-size: 0.8rem; /* text-xs */
         }
-        .notification-thumbnail {
+        .notification-thumbnail { /* Used for post thumbnails or document icons */
             width: 40px;
             height: 40px;
             border-radius: 0.25rem; /* rounded-sm */
             object-fit: cover;
             flex-shrink: 0;
             border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--card-bg);
         }
-        .notification-action button {
-            font-size: 0.8rem; /* text-xs */
-            font-weight: 500;
-            padding: 0.375rem 0.75rem; /* py-1.5 px-3 */
-            border-radius: 0.375rem; /* rounded-md */
-            cursor: pointer;
-            transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-            margin-left: 0.5rem; /* ml-2 */
-            flex-shrink: 0;
+        .notification-thumbnail i { /* Icon inside thumbnail */
+            font-size: 1.25rem; /* text-xl */
+            color: var(--icon-color);
         }
-        .follow-btn {
-            background-color: var(--follow-button-bg);
-            color: var(--follow-button-text);
-            border: none;
-        }
-        .follow-btn:hover { background-color: var(--follow-button-hover-bg); }
-        .following-btn {
-             background-color: var(--followed-button-bg);
-             color: var(--followed-button-text);
-             border: 1px solid var(--followed-button-border);
-        }
-        .following-btn:hover { border-color: var(--text-secondary); }
-
+        /* Removed follow/following button styles as they are not used in this version */
 
         /* Bottom Navigation (Reusing styles) */
         .bottom-nav {
@@ -168,95 +161,31 @@
     <main class="main-content" id="notificationList">
 
         <section class="notification-group">
-            <h2 class="group-header">Today</h2>
+            <h2 class="group-header">Recent Updates</h2>
 
-            <div class="notification-item" data-type="follow" data-user-id="user456">
-                <div class="notification-avatar">
-                    <img src="https://placehold.co/40x40/2a2a4e/ffffff?text=U" alt="User Avatar">
+            <div class="notification-item" data-type="post" data-org-id="NTA" data-post-id="nta_cuet_pg_key_2025">
+                <div class="notification-avatar" style="background-color: #3b5998; color: white;"> NTA
                 </div>
                 <div class="notification-content">
-                    <strong>User#456</strong> started following you. <span class="notification-time">2h</span>
+                    <strong>NTA</strong> posted: <span class="post-title">"Final Answer Key for CUET(PG) - 2025"</span> <span class="notification-time">1h</span>
                 </div>
-                <div class="notification-action">
-                    <button class="follow-btn">Follow</button>
-                </div>
+                <div class="notification-thumbnail">
+                    <i class="fas fa-file-alt"></i> </div>
             </div>
 
-            <div class="notification-item" data-type="like" data-post-id="post789">
-                <div class="notification-avatar">
-                     <img src="https://placehold.co/40x40/6a6aff/ffffff?text=A" alt="User Avatar">
+            <div class="notification-item" data-type="post" data-org-id="NIOS" data-post-id="nios_datasheet_apr_may_2025">
+                <div class="notification-avatar" style="background-color: #ffc107; color: #1a1a2e;"> NIOS
                 </div>
                 <div class="notification-content">
-                    <strong>Anonymous#1555</strong> liked your post about infrastructure. <span class="notification-time">3h</span>
+                    <strong>NIOS</strong> posted: <span class="post-title">"datesheet of NIOS public Examination April/May-2025 (India & Overseas)"</span> <span class="notification-time">3h</span>
                 </div>
-                <img src="https://placehold.co/40x40/1a1a2e/a0a0e0?text=Post" alt="Post thumbnail" class="notification-thumbnail">
-            </div>
-
-             <div class="notification-item" data-type="mention" data-post-id="post123">
-                <div class="notification-avatar">
-                     <img src="https://placehold.co/40x40/facc15/1a1a2e?text=O" alt="Organization Avatar">
-                </div>
-                <div class="notification-content">
-                    <strong>Org#Gov</strong> mentioned you in a post: "Regarding the road alignment..." <span class="notification-time">5h</span>
-                </div>
-                 <img src="https://placehold.co/40x40/1a1a2e/a0a0e0?text=Post" alt="Post thumbnail" class="notification-thumbnail">
+                <div class="notification-thumbnail">
+                     <i class="fas fa-calendar-alt"></i> </div>
             </div>
 
         </section>
-
-        <section class="notification-group">
-            <h2 class="group-header">This Week</h2>
-
-            <div class="notification-item" data-type="comment" data-post-id="post789">
-                <div class="notification-avatar">
-                     <img src="https://placehold.co/40x40/4ade80/1a1a2e?text=C" alt="User Avatar">
-                </div>
-                <div class="notification-content">
-                    <strong>Citizen#999</strong> commented: "I agree, this needs attention." on your post. <span class="notification-time">2d</span>
-                </div>
-                 <img src="https://placehold.co/40x40/1a1a2e/a0a0e0?text=Post" alt="Post thumbnail" class="notification-thumbnail">
-            </div>
-
-            <div class="notification-item" data-type="follow" data-user-id="user111">
-                <div class="notification-avatar">
-                    <img src="https://placehold.co/40x40/f87171/ffffff?text=X" alt="User Avatar">
-                </div>
-                <div class="notification-content">
-                    <strong>User#111</strong> started following you. <span class="notification-time">4d</span>
-                </div>
-                <div class="notification-action">
-                    <button class="following-btn">Following</button>
-                </div>
-            </div>
-
-             <div class="notification-item" data-type="like" data-post-id="post333">
-                <div class="notification-avatar">
-                     <span class="fa-stack fa-1x text-[var(--icon-color)]">
-                         <i class="fas fa-circle fa-stack-2x"></i>
-                         <i class="fas fa-heart fa-stack-1x fa-inverse text-xs"></i>
-                     </span>
-                </div>
-                <div class="notification-content">
-                    <strong>User#123</strong> and <strong>3 others</strong> liked your post about the illegal hoarding. <span class="notification-time">5d</span>
-                </div>
-                 <img src="https://placehold.co/40x40/1a1a2e/a0a0e0?text=Post" alt="Post thumbnail" class="notification-thumbnail">
-            </div>
-
-        </section>
-
-         <section class="notification-group">
-            <h2 class="group-header">Earlier</h2>
-             <div class="notification-item" data-type="system" data-info-id="update1">
-                <div class="notification-avatar bg-[var(--text-link)] flex items-center justify-center"> <i class="fas fa-info-circle text-xl"></i>
-                </div>
-                <div class="notification-content">
-                    Welcome to the platform! Check out the <a href="#" class="text-[var(--text-link)] hover:underline">Community Guidelines</a>. <span class="notification-time">2w</span>
-                </div>
-            </div>
-        </section>
-
-
-    </main>
+        
+        </main>
 
     <nav class="bottom-nav">
         <a href="dms.html" class="nav-item"> <i class="fas fa-users"></i> </a>
@@ -273,48 +202,29 @@
 
         notificationList.addEventListener('click', (event) => {
             const target = event.target;
-
-            // Handle click on the whole item (navigate)
             const notificationItem = target.closest('.notification-item');
-            if (notificationItem && !target.closest('button') && !target.closest('a')) { // Don't trigger if clicking button/link
+
+            if (notificationItem) {
                 const type = notificationItem.dataset.type;
-                const userId = notificationItem.dataset.userId;
+                const orgId = notificationItem.dataset.orgId;
                 const postId = notificationItem.dataset.postId;
-                console.log(`Notification clicked: type=${type}, user=${userId}, post=${postId}`);
+                console.log(`Notification clicked: type=${type}, org=${orgId}, post=${postId}`);
 
                 // Placeholder navigation logic
-                if (type === 'follow' && userId) {
-                    // alert(`Simulating navigation to profile: ${userId}`);
-                    // window.location.href = `profile.html?user=${userId}`; // Example
-                } else if (postId) {
-                     // alert(`Simulating navigation to post: ${postId}`);
-                     // window.location.href = `post_detail.html?post=${postId}`; // Example
+                if (type === 'post' && orgId && postId) {
+                    // Potentially navigate to the organization's profile or the specific post
+                    // For now, just an alert
+                    if (orgId === 'NTA') {
+                        // alert(`Simulating navigation to NTA post: ${postId}`);
+                        // window.location.href = `org_prof_page.html?org=NTA&post=${postId}`; // Example
+                    } else if (orgId === 'NIOS') {
+                        // alert(`Simulating navigation to NIOS post: ${postId}`);
+                        // window.location.href = `org_prof_page.html?org=NIOS&post=${postId}`; // Example
+                    }
                 } else {
-                    // alert('Clicked a notification.');
+                    // alert('Clicked a generic notification.');
                 }
             }
-
-            // Handle click on follow/following button
-            const followButton = target.closest('.follow-btn');
-            if (followButton) {
-                console.log('Follow button clicked');
-                followButton.textContent = 'Following';
-                followButton.classList.remove('follow-btn');
-                followButton.classList.add('following-btn');
-                // alert('Followed back (Simulation)');
-                // Add API call logic here
-            }
-
-            const followingButton = target.closest('.following-btn');
-             if (followingButton) {
-                 console.log('Following button clicked (-> Unfollow)');
-                 followingButton.textContent = 'Follow';
-                 followingButton.classList.remove('following-btn');
-                 followingButton.classList.add('follow-btn');
-                 // alert('Unfollowed (Simulation)');
-                 // Add API call logic here
-            }
-
         });
 
     </script>

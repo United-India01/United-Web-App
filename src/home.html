@@ -177,7 +177,7 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background-color: var(--text-link); /* Use link color for avatar bg */
+            /* background-color: var(--text-link); Use link color for avatar bg */
             color: var(--text-primary);
             display: flex;
             align-items: center;
@@ -186,6 +186,11 @@
             font-size: 1rem; /* text-base */
             flex-shrink: 0;
         }
+
+        .a1 { background-color: #4ade80; } /* Green */
+        .a2 { background-color: #60a5fa; } /* Blue */
+        .a3 { background-color: #f87171; } /* Red */
+
         .post-meta {
             flex-grow: 1;
         }
@@ -372,7 +377,7 @@
     <main id="feedContainer">
         <a href="post_detail.html"><article class="post-card">
             <div class="post-header">
-                <div class="post-avatar">A</div>
+                <div class="post-avatar a1">A</div>
                 <div class="post-meta">
                     <div class="post-author-line">
                         <span class="post-author">Anonymous#1235</span>
@@ -406,7 +411,7 @@
 
         <article class="post-card">
              <div class="post-header">
-                <div class="post-avatar">A</div>
+                <div class="post-avatar a2">A</div>
                 <div class="post-meta">
                     <div class="post-author-line">
                         <span class="post-author">Anonymous#1555</span>
@@ -435,7 +440,7 @@
 
         <article class="post-card">
             <div class="post-header">
-                <div class="post-avatar">I</div>
+                <div class="post-avatar a3">A</div>
                 <div class="post-meta">
                     <div class="post-author-line">
                         <span class="post-author">Anonymous#3332</span>
